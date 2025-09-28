@@ -1,3 +1,25 @@
+<div class="sidebar-profile">
+  <div class="profile-img-wrap">
+    <img src="{{ .Site.Params.profileImage }}" alt="Profile" class="profile-img" />
+  </div>
+  <div class="sidebar-social">
+    <!-- https://fontawesome.com/icons -->
+    <!-- Font Awesome CSS is included via html-head.html -->
+    <a href="{{ .Site.Params.linkedin }}" target="_blank" title="LinkedIn" class="disabled">
+      <i class="fa-brands fa-linkedin"></i>
+    </a>
+    <a href="{{ .Site.Params.notion }}" target="_blank" title="Notion" class="disabled">
+      <i class="fa-brands fa-notion"></i>
+    </a>
+    <a href="{{ .Site.Params.github }}" target="_blank" title="GitHub">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+      <i class="fa-solid fa-circle-half-stroke"></i>
+    </button>
+  </div>
+</div>
+
 <h2 class="book-brand">
   <a class="flex align-center" href="{{ cond (not .Site.Home.File) .Sites.Default.Home.RelPermalink .Site.Home.RelPermalink }}">
     {{- with .Site.Params.BookLogo -}}
