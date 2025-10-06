@@ -35,8 +35,7 @@
 - [x] Apply dark mode colors to main layout elements.
 
 ## Additional Features
-- [ ] Add "move to top" and "move to bottom" buttons fixed at the bottom right.
-- [ ] Add a back button fixed at the bottom right.
+- [x] Add "go to top", "go to bottom", and "go back" buttons at the bottom right.
 - [x] Add a scroll progress bar at the top.
 
 ## Site Integration
