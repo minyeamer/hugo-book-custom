@@ -61,5 +61,10 @@ https://github.com/alex-shpak/hugo-book
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
 
-<!-- Dark Mode -->
-<script src="/dark-mode-toggle.js"></script>
+<!-- Scroll Progress Bar -->
+{{- $scrollProgressJS := resources.Get "scroll-progress.js" }}
+<script defer src="{{ $scrollProgressJS.RelPermalink }}" {{ template "integrity" $scrollProgressJS }}></script>
+
+<!-- Dark Mode Toggle -->
+{{- $darkModeJS := resources.Get "dark-mode.js" }}
+<script src="{{ $darkModeJS.RelPermalink }}"></script>

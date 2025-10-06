@@ -189,6 +189,10 @@ body[dir="rtl"] .book-menu {
   margin: 0 auto;
   flex-grow: 1;
   padding: $padding-16;
+
+  .book-article h1 {
+    text-align: center;
+  }
 }
 
 .book-post {

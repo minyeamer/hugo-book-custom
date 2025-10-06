@@ -10,7 +10,7 @@
 - [x] Display the header when either the menu or ToC is hidden.
 - [x] Keep the header fixed at the top with a slightly transparent background.
 - [x] When the ToC is hidden and the menu is visible, disable only the menu icon in the header.
-- [ ] Keep the header always visible and disable icons in the header when both menu and ToC are displayed.
+- [x] ~~Keep the header always visible and disable icons in the header when both menu and ToC are displayed.~~
 - [ ] Make the header title link back to the homepage.
 
 ## Menu
@@ -37,7 +37,7 @@
 ## Additional Features
 - [ ] Add "move to top" and "move to bottom" buttons fixed at the bottom right.
 - [ ] Add a back button fixed at the bottom right.
-- [ ] Add a scroll progress indicator at the top.
+- [x] Add a scroll progress bar at the top.
 
 ## Site Integration
 - [ ] Add homepage and search pages (or style search area in the menu).
