@@ -23,8 +23,13 @@ html.dark-mode, body.dark-mode {
 }
 
 .dark-mode #TableOfContents {
-  a {
+  a:not(.active) {
     color: #acacac;
+  }
+
+  a.active {
+    color: #fff;
+    font-weight: bold;
   }
 }
 

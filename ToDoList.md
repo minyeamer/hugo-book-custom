@@ -22,7 +22,7 @@
 ## Table of Contents
 - [x] Change ToC text color to black in light mode and gray in dark mode.
 - [x] Add a border on the left side of the ToC matching the text color, except ToC in header.
-- [ ] Highlight the current active ToC item.
+- [x] Highlight the currently active ToC link.
 
 ## Code Block
 - [x] Apply dark mode colors to inline code blocks.

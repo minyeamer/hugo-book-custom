@@ -63,8 +63,12 @@ https://github.com/alex-shpak/hugo-book
 
 <!-- Scroll Progress Bar -->
 {{- $scrollProgressJS := resources.Get "scroll-progress.js" }}
-<script defer src="{{ $scrollProgressJS.RelPermalink }}" {{ template "integrity" $scrollProgressJS }}></script>
+<script defer src="{{ $scrollProgressJS.RelPermalink }}"></script>
 
 <!-- Dark Mode Toggle -->
 {{- $darkModeJS := resources.Get "dark-mode.js" }}
 <script src="{{ $darkModeJS.RelPermalink }}"></script>
+
+<!-- ToC Highlight -->
+{{- $tocHighlightJS := resources.Get "toc-highlight.js" }}
+<script defer src="{{ $tocHighlightJS.RelPermalink }}"></script>

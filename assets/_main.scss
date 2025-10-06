@@ -350,6 +350,10 @@ body[dir="rtl"] .book-menu {
   a {
     color: #000;
   }
+
+  a.active {
+    font-weight: bold;
+  }
 }
 
 .book-toc #TableOfContents {
