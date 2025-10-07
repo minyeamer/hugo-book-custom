@@ -59,6 +59,7 @@ https://github.com/alex-shpak/hugo-book
 {{- end -}}
 
 <!-- Font Awesome -->
+<!-- https://fontawesome.com/icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
 
 <!-- Scroll Progress Bar -->
@@ -68,6 +69,18 @@ https://github.com/alex-shpak/hugo-book
 <!-- Dark Mode Toggle -->
 {{- $darkModeJS := resources.Get "dark-mode.js" }}
 <script src="{{ $darkModeJS.RelPermalink }}"></script>
+
+<!-- Highlight.js -->
+<!-- https://highlightjs.org/ -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/xcode.min.css"> // [data-theme="light"] -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/vs2015.min.css"> // [data-theme="dark"] -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<!-- https://github.com/wcoder/highlightjs-line-numbers.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+
+<!-- Code Copy -->
+{{- $copyCodeJS := resources.Get "copy-code.js" }}
+<script defer src="{{ $copyCodeJS.RelPermalink }}"></script>
 
 <!-- ToC Highlight -->
 {{- $tocHighlightJS := resources.Get "toc-highlight.js" }}

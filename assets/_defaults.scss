@@ -50,23 +50,33 @@ $hint-colors: (
 
   --color-link: #0055bb;
   --color-visited-link: #5500bb;
+  --color-social-link: #fff;
 
   --body-background: white;
   --body-font-color: black;
 
+  --toc-font-color: black;
+  --toc-active-color: black;
+
   --icon-filter: none;
+  --lineno-font-color: rgba(0, 0, 0, 0.5);
 }
 
 @mixin theme-dark {
-  --gray-100: #494e54;
-  --gray-200: #5c6165;
-  --gray-500: #999d9f;
+  --gray-100: #23272a;
+  --gray-200: #2d3339;
+  --gray-500: #6c757d;
 
-  --color-link: #84b2ff;
-  --color-visited-link: #b88dff;
+  --color-link: #8ecfff;
+  --color-visited-link: #a7aaff;
+  --color-social-link: #222;
 
-  --body-background: #343a40;
-  --body-font-color: #e9ecef;
+  --body-background: #181a1b;
+  --body-font-color: #f5f6fa;
+
+  --toc-font-color: #acacac;
+  --toc-active-color: white;
 
   --icon-filter: brightness(0) invert(1);
+  --lineno-font-color: rgba(255, 255, 255, 0.5);
 }

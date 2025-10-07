@@ -117,6 +117,7 @@ ul.pagination {
   .book-menu-content {
     width: $menu-width;
     padding: $padding-32;
+    background: var(--gray-200);
 
     @include fixed;
   }
@@ -277,7 +278,7 @@ body[dir="rtl"] .book-menu {
     border: 0;
     border-radius: $border-radius;
 
-    background: var(--gray-100);
+    background: var(--gray-200);
     color: var(--body-font-color);
 
     &:required + .book-search-spinner {
@@ -348,16 +349,17 @@ body[dir="rtl"] .book-menu {
   padding-left: 1rem;
 
   a {
-    color: #000;
+    color: var(--toc-font-color);
   }
 
   a.active {
+    color: var(--toc-active-color);
     font-weight: bold;
   }
 }
 
 .book-toc #TableOfContents {
-  border-left: 1px solid #000;
+  border-left: 1px solid var(--toc-font-color);
 }
 
 /* Right Navigation */
@@ -382,7 +384,7 @@ body[dir="rtl"] .book-menu {
 
     border: 0px;
     border-radius: 50%;
-    background: var(--gray-100);
+    background: var(--gray-200);
     color: var(--body-font-color);
 
     cursor: pointer;

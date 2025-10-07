@@ -1,48 +1,5 @@
 /* Dark Mode Toggle */
 
-:root {
-  --color-social-link: #222;
-}
-
-html.dark-mode, body.dark-mode {
-  --body-background: #181a1b;
-  --body-font-color: #f5f6fa;
-  --gray-100: #23272a;
-  --color-link: #8ecfff;
-  --color-visited-link: #a7aaff;
-  --color-social-link: #fff;
-}
-
-.dark-mode .book-menu-content {
-  background: var(--gray-100);
-  color: var(--body-font-color);
-}
-
-.dark-mode .dark-mode-toggle {
-  color: #ffe066;
-}
-
-.dark-mode #TableOfContents {
-  a:not(.active) {
-    color: #acacac;
-  }
-
-  a.active {
-    color: #fff;
-    font-weight: bold;
-  }
-}
-
-.dark-mode .book-toc {
-  #TableOfContents {
-    border-left: 1px solid #acacac;
-  }
-}
-
-.dark-mode .book-icon {
-  color: #fff;
-}
-
 .dark-mode-toggle {
   margin-top: 1rem;
   background: none;
@@ -53,13 +10,130 @@ html.dark-mode, body.dark-mode {
   transition: color 0.2s;
 }
 
-/* Code Block */
+[data-theme="dark"] .dark-mode-toggle {
+  color: #ffe066;
+}
 
-.dark-mode p code,
-.dark-mode li code,
-.dark-mode span code {
-  background-color: #363636; /* 다크 배경 */
-  color: #ececec;
+/* Code Block */
+/* https://highlightjs.org/ */
+/* https://carbon.now.sh/ */
+
+.book-codeblock {
+  position: relative;
+  margin: 1.25rem 0;
+
+  pre {
+    border-radius: 0.625rem;
+    padding: 1rem 0 0 0;
+    margin: 0;
+    position: relative;
+    overflow: scroll;
+
+    // Mac window controls
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.9375rem;
+      left: 1.25rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      background: #ff5f57;
+      border-radius: 50%;
+      box-shadow: 1.375rem 0 0 #ffbd2e, 2.75rem 0 0 #28ca42;
+    }
+  }
+
+  .code-actions {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .code-action {
+    background: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+
+    border: none;
+    border-radius: 0.25rem;
+
+    font-size: $font-size-12;
+    text-transform: uppercase;
+
+    height: 1.5rem;
+    min-width: 4.5rem;
+  }
+
+  .btn-code-copy {
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    &.copied {
+      background: rgba(76, 175, 80, 0.8);
+    }
+
+    i {
+      margin-right: $padding-4;
+      font-size: $font-size-12;
+    }
+  }
+
+  .code-language {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* highlight.js line numbers */
+
+  .hljs-ln {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    display: table;
+  }
+
+  .hljs-ln tbody {
+    display: table-row-group;
+  }
+
+  .hljs-ln tr {
+    display: table-row;
+  }
+
+  .hljs-ln td {
+    display: table-cell;
+    border: none !important;
+    vertical-align: top;
+    margin: 0;
+    padding: 0 0.625rem 0;
+    white-space: pre;
+  }
+
+  .hljs-ln-numbers {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    display: table-cell;
+    text-align: right;
+    white-space: nowrap;
+
+    width: 2rem;
+    min-width: 2rem;
+    color: var(--lineno-font-color);
+  }
 }
 
 /* Scroll Progress Bar */

@@ -26,8 +26,9 @@
 
 ## Code Block
 - [x] Apply dark mode colors to inline code blocks.
-- [ ] Add line numbers to code blocks.
-- [ ] Style code blocks in a Mac terminal style, including copy functionality.
+- [x] Add line numbers to code blocks.
+- [x] Add copy button and langugage display.
+- [x] Style code blocks in a Mac terminal style.
 
 ## Dark Mode
 - [x] Add JavaScript to toggle dark mode on/off via the dark mode toggle button.
