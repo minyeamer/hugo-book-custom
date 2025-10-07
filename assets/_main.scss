@@ -235,6 +235,10 @@ body[dir="rtl"] .book-menu {
     text-overflow: ellipsis;
     margin: 0 $padding-16;
   }
+
+  .site-title {
+    color: var(--body-font-color);
+  }
 }
 
 .book-layout-landing .book-header {
@@ -464,6 +468,7 @@ body[dir="rtl"] .book-menu {
   .book-header {
     display: block;
     position: sticky;
+    z-index: 100;
     opacity: 0.9;
     top: 0;
     background-color: var(--body-background);

@@ -1,16 +1,17 @@
 <div class="sidebar-profile">
   <div class="profile-img-wrap">
-    <img src="{{ .Site.Params.profileImage }}" alt="Profile" class="profile-img" />
+    <a href="{{ .Site.BaseURL }}">
+      <img src="{{ .Site.Params.profileImage }}" alt="Profile" class="profile-img" />
+    </a>
   </div>
   <div class="sidebar-social">
-    <!-- Font Awesome CSS is included via html-head.html -->
-    <a href="{{ .Site.Params.linkedin }}" target="_blank" title="LinkedIn" class="disabled">
+    <a href="{{ .Site.Params.linkedin }}" target="_blank" title="LinkedIn" {{ if not .Site.Params.linkedin }}class="disabled"{{ end }}>
       <i class="fa-brands fa-linkedin"></i>
     </a>
-    <a href="{{ .Site.Params.notion }}" target="_blank" title="Notion" class="disabled">
+    <a href="{{ .Site.Params.notion }}" target="_blank" title="Notion" {{ if not .Site.Params.notion }}class="disabled"{{ end }}>
       <i class="fa-brands fa-notion"></i>
     </a>
-    <a href="{{ .Site.Params.github }}" target="_blank" title="GitHub">
+    <a href="{{ .Site.Params.github }}" target="_blank" title="GitHub" {{ if not .Site.Params.github }}class="disabled"{{ end }}>
       <i class="fa-brands fa-github"></i>
     </a>
     <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">

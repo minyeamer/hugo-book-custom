@@ -17,11 +17,7 @@ enableGitInfo = true
 
 [markup.highlight]
   codeFences = true
-  lineNos = false
-  lineNumbersInTable = false
   noClasses = false
-  style = "github"
-  tabWidth = 4
 
 [markup.tableOfContents]
   startLevel = 1

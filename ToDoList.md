@@ -11,13 +11,13 @@
 - [x] Keep the header fixed at the top with a slightly transparent background.
 - [x] When the ToC is hidden and the menu is visible, disable only the menu icon in the header.
 - [x] ~~Keep the header always visible and disable icons in the header when both menu and ToC are displayed.~~
-- [ ] Make the header title link back to the homepage.
+- [x] Make the header title link back to the homepage.
 
 ## Menu
 - [x] Add a profile picture at the top of the menu.
 - [x] Add social media icons and a dark mode toggle button below the profile picture.
 - [x] Configure social icons to link to URLs provided via configuration parameters.
-- [ ] Disable social icons that lack corresponding links.
+- [x] Disable social icons that lack corresponding links.
 
 ## Table of Contents
 - [x] Change ToC text color to black in light mode and gray in dark mode.
