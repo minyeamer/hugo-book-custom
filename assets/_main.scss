@@ -1,6 +1,6 @@
 html {
   font-size: $font-size-base;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   touch-action: manipulation;
   scrollbar-gutter: stable;
 }
@@ -28,7 +28,7 @@ h6 {
 a {
   flex: auto;
   align-items: center;
-  gap: .5em;
+  gap: $padding-8;
 
   text-decoration: none;
   cursor: default;
@@ -67,17 +67,6 @@ nav ul {
 
   ul {
     padding-inline-start: 1.5em;
-  }
-}
-
-ul.pagination {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  padding-inline-start: 0px;
-
-  .page-item a {
-    padding: $padding-16;
   }
 }
 
@@ -444,6 +433,105 @@ body[dir="rtl"] .book-menu {
 
   ul {
     padding-inline-start: 1.5em;
+  }
+}
+
+/* Pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $padding-4;
+
+  padding: 2rem 0;
+  margin-top: 2rem;
+  border-top: 1px solid var(--gray-200);
+  max-width: 100%;
+
+  .pagination-nav, .pagination-page {
+    padding: $padding-8;
+    border: 1px solid var(--gray-200);
+    border-radius: 4px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    text-align: center;
+    white-space: nowrap;
+
+    &:hover {
+      background: var(--gray-200);
+      border-color: var(--color-link);
+    }
+  }
+}
+
+.markdown {
+  a[href].pagination-link {
+    color: var(--body-font-color);
+    text-decoration: none;
+  }
+
+  a[href]:hover.pagination-link {
+    color: var(--body-font-color);
+    text-decoration: none;
+  }
+
+  a[href]:visited.pagination-link {
+    color: var(--body-font-color);
+    text-decoration: none;
+  }
+}
+
+.pagination-nav {
+  width: 4rem;
+
+  &.disabled {
+    border: 1px solid var(--gray-200);
+    color: var(--gray-500);
+    cursor: not-allowed;
+  }
+
+  i {
+    font-size: $font-size-12;
+  }
+}
+
+.pagination-pages {
+  display: flex;
+  gap: $padding-4;
+
+  .pagination-page {
+    min-width: 2.5rem;
+
+    &.current {
+      background: var(--color-page-link);
+      border-color: var(--color-link);
+      cursor: default;
+    }
+  }
+}
+
+#pagination-anchor {
+  position: relative;
+  top: -100px;
+  visibility: hidden;
+}
+
+@media (max-width: $body-max-width) {
+  .pagination {
+    flex-wrap: wrap;
+    gap: $padding-8;
+  }
+
+  .pagination-pages {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .pagination-nav {
+    order: 2;
   }
 }
 

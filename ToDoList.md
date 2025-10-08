@@ -40,7 +40,8 @@
 - [x] Add a scroll progress bar at the top.
 
 ## Site Integration
-- [ ] Add homepage and search pages (or style search area in the menu).
+- [x] Add home page.
+- [ ] Add search pages (or style search area in the menu).
 - [ ] Add category pages (or style category area in the menu).
 - [ ] Show the 5 most recent posts in the menu.
 - [ ] Add navigation buttons at the bottom of current article to move between articles by created time.

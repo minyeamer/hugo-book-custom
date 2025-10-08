@@ -3,6 +3,7 @@ $padding-1: 1px !default;
 $padding-4: 0.25rem !default;
 $padding-8: 0.5rem !default;
 $padding-16: 1rem !default;
+$padding-24: 1.5rem !default;
 $padding-32: 2rem !default;
 $padding-48: 3rem !default;
 
@@ -12,6 +13,7 @@ $font-size-14: 0.875rem !default;
 $font-size-16: 1rem !default;
 $font-size-18: 1.125rem !default;
 $font-size-20: 1.25rem !default;
+$font-size-24: 1.5rem !default;
 $font-size-32: 2rem !default;
 $font-size-40: 2.5rem !default;
 
@@ -47,9 +49,11 @@ $hint-colors: (
   --gray-100: #f8f9fa;
   --gray-200: #e9ecef;
   --gray-500: #adb5bd;
+  --gray-800: #495057;
 
   --color-link: #0055bb;
   --color-visited-link: #5500bb;
+  --color-page-link: #adb5bd;
   --color-social-link: #fff;
 
   --body-background: white;
@@ -59,6 +63,7 @@ $hint-colors: (
   --toc-active-color: black;
 
   --icon-filter: none;
+  --box-shadow: rgba(0, 0, 0, 0.1);
   --lineno-font-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -66,9 +71,11 @@ $hint-colors: (
   --gray-100: #23272a;
   --gray-200: #2d3339;
   --gray-500: #6c757d;
+  --gray-800: #adb5bd;
 
   --color-link: #8ecfff;
   --color-visited-link: #a7aaff;
+  --color-page-link: black;
   --color-social-link: #222;
 
   --body-background: #181a1b;
@@ -78,5 +85,6 @@ $hint-colors: (
   --toc-active-color: white;
 
   --icon-filter: brightness(0) invert(1);
+  --box-shadow: rgba(255, 255, 255, 0.1);
   --lineno-font-color: rgba(255, 255, 255, 0.5);
 }
