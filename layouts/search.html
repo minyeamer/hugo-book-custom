@@ -1,0 +1,36 @@
+{{ define "main" }}
+<article class="markdown book-article">
+  <div class="search-header">
+    <h1>검색 결과</h1>
+    <div class="search-query-info">
+      <p id="search-query-display"></p>
+    </div>
+  </div>
+
+  {{ $allPosts := where .Site.RegularPages "Section" "post" }}
+
+  <div id="search-no-results" class="search-no-results hidden">
+    <p>검색 결과가 없습니다.</p>
+  </div>
+
+  <div class="post-list">
+    {{ range $allPosts }}
+      <div class="search-item"
+          data-href="{{ .RelPermalink }}"
+          style="display: none;">
+        {{ partial "docs/post-item.html" . }}
+      </div>
+    {{ end }}
+  </div>
+
+  <div id="search-pagination" style="display: none;">
+    <!-- Patination template -->
+    {{ $defaultPaginator := dict
+      "PageNumber" 1
+      "TotalPages" 10
+      "First" (dict "URL" "/search/")
+    }}
+    {{ partial "docs/pagination/search.html" (dict "paginator" $defaultPaginator "query" "") }}
+  </div>
+</article>
+{{ end }}

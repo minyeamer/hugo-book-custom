@@ -31,13 +31,23 @@ https://github.com/alex-shpak/hugo-book
 {{- $styles := resources.Get "book.scss" | resources.ExecuteAsTemplate "book.scss" . | css.Sass | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ partial "docs/links/resource-precache" $styles }}" {{ template "integrity" $styles }}>
 
-<!-- Search -->
+<!-- Search Input -->
 {{- if default true .Site.Params.BookSearch -}}
-  {{- $searchJSFile := printf "%s.search.js" .Language.Lang }}
-  {{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate $searchJSFile . | resources.Minify | resources.Fingerprint }}
+  {{- $searchInputJS := resources.Get "search-input.js" | resources.ExecuteAsTemplate "search-input.js" . | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ "fuse.min.js" | relURL }}"></script>
-  <script defer src="{{ partial "docs/links/resource-precache" $searchJS }}" {{ template "integrity" $searchJS }}></script>
+  <script defer src="{{ partial "docs/links/resource-precache" $searchInputJS }}" {{ template "integrity" $searchInputJS }}></script>
 {{ end -}}
+
+<!-- Search Data -->
+{{- $searchData := resources.Get "search-data.json" | resources.ExecuteAsTemplate "search-data.json" . | resources.Minify | resources.Fingerprint }}
+<link rel="preload" href="{{ $searchData.RelPermalink }}" as="fetch" crossorigin>
+<script>
+  window.SEARCH_DATA_URL = "{{ $searchData.RelPermalink }}";
+</script>
+
+<!-- Search -->
+{{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate "search.js" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ partial "docs/links/resource-precache" $searchJS }}" {{ template "integrity" $searchJS }}></script>
 
 <!-- Service Worker -->
 {{- if .Site.Params.BookServiceWorker -}}
@@ -63,12 +73,12 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
 
 <!-- Scroll Progress Bar -->
-{{- $scrollProgressJS := resources.Get "scroll-progress.js" }}
-<script defer src="{{ $scrollProgressJS.RelPermalink }}"></script>
+{{- $scrollProgressJS := resources.Get "scroll-progress.js" | resources.ExecuteAsTemplate "scroll-progress.js" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ partial "docs/links/resource-precache" $scrollProgressJS }}" {{ template "integrity" $scrollProgressJS }}></script>
 
 <!-- Dark Mode Toggle -->
-{{- $darkModeJS := resources.Get "dark-mode.js" }}
-<script src="{{ $darkModeJS.RelPermalink }}"></script>
+{{- $darkModeJS := resources.Get "dark-mode.js" | resources.ExecuteAsTemplate "dark-mode.js" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ partial "docs/links/resource-precache" $darkModeJS }}" {{ template "integrity" $darkModeJS }}></script>
 
 <!-- Highlight.js -->
 <!-- https://highlightjs.org/ -->
@@ -79,9 +89,9 @@ https://github.com/alex-shpak/hugo-book
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
 
 <!-- Code Copy -->
-{{- $copyCodeJS := resources.Get "copy-code.js" }}
-<script defer src="{{ $copyCodeJS.RelPermalink }}"></script>
+{{- $copyCodeJS := resources.Get "copy-code.js" | resources.ExecuteAsTemplate "copy-code.js" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ partial "docs/links/resource-precache" $copyCodeJS }}" {{ template "integrity" $copyCodeJS }}></script>
 
 <!-- ToC Highlight -->
-{{- $tocHighlightJS := resources.Get "toc-highlight.js" }}
-<script defer src="{{ $tocHighlightJS.RelPermalink }}"></script>
+{{- $tocHighlightJS := resources.Get "toc-highlight.js" | resources.ExecuteAsTemplate "toc-highlightjs" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ partial "docs/links/resource-precache" $tocHighlightJS }}" {{ template "integrity" $tocHighlightJS }}></script>

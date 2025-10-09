@@ -2,7 +2,7 @@
 <article class="markdown book-article">
   <div class="home-header">
     <h1><a href="{{ .Site.BaseURL }}" class="site-title">{{ .Site.Title }}</a></h1>
-    <p>전체 글 <em>{{ len (where .Site.RegularPages "Section" "post") }}</em></p>
+    <p>전체 글 <em class="post-count">{{ len (where .Site.RegularPages "Section" "post") }}</em></p>
   </div>
 
   {{ $paginator := .Paginate (where .Site.RegularPages "Section" "post") 10 }}
@@ -13,6 +13,6 @@
     {{ end }}
   </div>
 
-  {{ partial "docs/pagination.html" $paginator }}
+  {{ partial "docs/pagination/index.html" $paginator }}
 </article>
 {{ end }}
