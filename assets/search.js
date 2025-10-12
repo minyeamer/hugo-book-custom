@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function initSearch() {
     const displayElement = document.getElementById('search-query-display');
     if (query) {
-      displayElement.innerHTML = `"${query}" 검색 결과 <em class="post-count" id="search-count">0</em>`;
+      displayElement.innerHTML = `"${query}" 검색 결과 <em class="list-count" id="search-count">0</em>`;
     } else {
       displayElement.textContent = '검색어를 입력해주세요.';
     }

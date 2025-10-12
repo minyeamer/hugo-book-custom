@@ -8,11 +8,11 @@
     <a href="{{ .Site.Params.linkedin }}" target="_blank" title="LinkedIn" {{ if not .Site.Params.linkedin }}class="disabled"{{ end }}>
       <i class="fa-brands fa-linkedin"></i>
     </a>
-    <a href="{{ .Site.Params.notion }}" target="_blank" title="Notion" {{ if not .Site.Params.notion }}class="disabled"{{ end }}>
-      <i class="fa-brands fa-notion"></i>
-    </a>
     <a href="{{ .Site.Params.github }}" target="_blank" title="GitHub" {{ if not .Site.Params.github }}class="disabled"{{ end }}>
       <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="{{ "/tags/" | relURL }}" title="Tags">
+      <i class="fa-solid fa-tags"></i>
     </a>
     <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
       <i class="fa-solid fa-circle-half-stroke"></i>

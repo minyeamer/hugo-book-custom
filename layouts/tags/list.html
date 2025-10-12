@@ -1,11 +1,11 @@
 {{ define "main" }}
 <article class="markdown book-article">
   <div class="list-header">
-    <h1><a href="{{ .Site.BaseURL }}" class="site-title">{{ .Site.Title }}</a></h1>
-    <p>전체 글 <em class="list-count">{{ len (where .Site.RegularPages "Section" "post") }}</em></p>
+    <h1><i class="fa-solid fa-tag"></i> {{ .Title }}</h1>
+    <p>전체 글 <em class="list-count">{{ len .Pages }}</em></p>
   </div>
 
-  {{ $paginator := .Paginate (where .Site.RegularPages "Section" "post") 10 }}
+  {{ $paginator := .Paginate .Pages 10 }}
 
   <div class="post-list">
     {{ range $paginator.Pages }}
