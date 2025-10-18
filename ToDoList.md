@@ -13,11 +13,18 @@
 - [x] ~~Keep the header always visible and disable icons in the header when both menu and ToC are displayed.~~
 - [x] Make the header title link back to the homepage.
 
+## Footer
+- [x] Add bottom navigation for posts within same categories by creation time.
+- [x] Add post tags to footer.
+
 ## Menu
 - [x] Add a profile picture at the top of the menu.
 - [x] Add social media icons and a dark mode toggle button below the profile picture.
 - [x] Configure social icons to link to URLs provided via configuration parameters.
 - [x] Disable social icons that lack corresponding links.
+- [x] Improve search input.
+- [x] Improve category menu.
+- [x] Show the 5 most recent posts in the menu.
 
 ## Table of Contents
 - [x] Change ToC text color to black in light mode and gray in dark mode.
@@ -42,12 +49,8 @@
 ## Site Integration
 - [x] Add home page.
 - [x] Add search pages.
-- [x] Improve search input.
 - [x] Add category pages.
-- [x] Improve category menu.
 - [x] Add tag pages with the tag list page.
-- [x] Show the 5 most recent posts in the menu.
-- [x] Add bottom navigation for posts within same categories by creation time.
 - [ ] Integrate comment functionality (Utterances)
 - [ ] Add social sharing buttons at the bottom of current article.
 - [ ] Integrate visitor statistics with GA4.

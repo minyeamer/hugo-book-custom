@@ -22,6 +22,9 @@
 </div>
 
 {{ if eq .Section "post" }}
+  {{ if .Params.tags }}
+    {{ partial "docs/post-tags" . }}
+  {{ end }}
   {{ partial "docs/post-prev-next" . }}
 {{ else }}
   {{ partial "docs/prev-next" . }}
