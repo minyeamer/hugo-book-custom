@@ -1,0 +1,138 @@
+{{ if .Site.Taxonomies.categories }}
+<div class="book-categories">
+  <input type="checkbox" class="hidden toggle" id="categories-control" checked />
+  <label for="categories-control" class="categories-toggle categories-link">
+    <a href="/categories/">
+      <i class="fa-solid fa-folder"></i>
+      <span>{{ default "Categories" .Site.Params.categoriesLabel }}</span>
+      <span class="category-count">({{ len .Site.RegularPages }})</span>
+    </a>
+    <i class="fa-solid fa-chevron-down categories-arrow"></i>
+  </label>
+
+  <ul class="categories-menu" id="categories-menu">
+    {{ $categoryTree := dict }}
+    {{ $categoryCount := dict }}
+
+    {{/* Build category tree and count posts for 2 levels only */}}
+    {{ range .Site.RegularPages }}
+      {{ if .Params.categories }}
+        {{ $categories := .Params.categories }}
+        {{ $typeStr := printf "%T" $categories }}
+        {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
+          {{/* Build tree structure for 2 levels only */}}
+          {{ if gt (len $categories) 0 }}
+            {{ $level1 := index $categories 0 }}
+            {{ if not (index $categoryTree $level1) }}
+              {{ $categoryTree = $categoryTree | merge (dict $level1 dict) }}
+            {{ end }}
+
+            {{/* Count level 1 */}}
+            {{ $currentCount := index $categoryCount $level1 | default 0 }}
+            {{ $categoryCount = $categoryCount | merge (dict $level1 (add $currentCount 1)) }}
+
+            {{ if gt (len $categories) 1 }}
+              {{ $level2 := index $categories 1 }}
+              {{ $level1Data := index $categoryTree $level1 }}
+              {{ if not (index $level1Data $level2) }}
+                {{ $level1Data = $level1Data | merge (dict $level2 dict) }}
+                {{ $categoryTree = $categoryTree | merge (dict $level1 $level1Data) }}
+              {{ end }}
+
+              {{/* Count level 2 */}}
+              {{ $level2Key := printf "%s/%s" $level1 $level2 }}
+              {{ $currentCount2 := index $categoryCount $level2Key | default 0 }}
+              {{ $categoryCount = $categoryCount | merge (dict $level2Key (add $currentCount2 1)) }}
+            {{ end }}
+          {{ end }}
+
+        {{ else if eq $typeStr "string" }}
+          {{/* Handle single category as string */}}
+          {{ $level1 := $categories }}
+          {{ if not (index $categoryTree $level1) }}
+            {{ $categoryTree = $categoryTree | merge (dict $level1 dict) }}
+          {{ end }}
+          {{ $currentCount := index $categoryCount $level1 | default 0 }}
+          {{ $categoryCount = $categoryCount | merge (dict $level1 (add $currentCount 1)) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Count posts manually for hierarchical categories */}}
+    {{ range $category1, $children1 := $categoryTree }}
+      {{ $categoryCount1 := 0 }}
+
+      {{/* Count all posts that start with this category */}}
+      {{ range $.Site.RegularPages }}
+        {{ if .Params.categories }}
+          {{ $categories := .Params.categories }}
+          {{ $typeStr := printf "%T" $categories }}
+          {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
+            {{ if gt (len $categories) 0 }}
+              {{ if eq (index $categories 0) $category1 }}
+                {{ $categoryCount1 = add $categoryCount1 1 }}
+              {{ end }}
+            {{ end }}
+          {{ else if eq $typeStr "string" }}
+            {{ if eq $categories $category1 }}
+              {{ $categoryCount1 = add $categoryCount1 1 }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      <li>
+        {{ if $children1 }}
+        <input type="checkbox" class="hidden toggle" id="cat-{{ $category1 | urlize }}" />
+        <label for="cat-{{ $category1 | urlize }}" class="categories-toggle categories-link">
+          <a href="/categories/{{ $category1 | urlize }}/">
+            <i class="fa-solid fa-folder"></i>
+            {{ $category1 }}
+            <span class="category-count">({{ $categoryCount1 }})</span>
+          </a>
+          <i class="fa-solid fa-chevron-down categories-arrow"></i>
+        </label>
+        <ul>
+
+          {{ range $category2, $children2 := $children1 }}
+            {{ $categoryCount2 := 0 }}
+
+            {{/* Count posts that have exactly this category combination */}}
+            {{ range $.Site.RegularPages }}
+              {{ if .Params.categories }}
+                {{ $categories := .Params.categories }}
+                {{ $typeStr := printf "%T" $categories }}
+                {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
+                  {{ if ge (len $categories) 2 }}
+                    {{ $categoryMatch1 := eq (index $categories 0) $category1 }}
+                    {{ $categoryMatch2 := eq (index $categories 1) $category2 }}
+                    {{ if and $categoryMatch1 $categoryMatch2 }}
+                      {{ $categoryCount2 = add $categoryCount2 1 }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+
+            <li class="categories-link">
+              <a href="/categories/{{ $category1 | urlize }}/{{ $category2 | urlize }}/">
+                <i class="fa-solid fa-file"></i>
+                {{ $category2 }}
+                <span class="category-count">({{ $categoryCount2 }})</span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+
+        {{ else }}
+        <a href="/categories/{{ $category1 | urlize }}/">
+          <i class="fa-solid fa-file"></i>
+          {{ $category1 }}
+          <span class="category-count">({{ $categoryCount1 }})</span>
+        </a>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

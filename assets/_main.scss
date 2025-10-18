@@ -265,6 +265,7 @@ body[dir="rtl"] .book-menu {
   position: relative;
   margin: $padding-8 0;
   border-bottom: 1px solid transparent;
+  z-index: 10;
 
   .search-input-container {
     position: relative;
@@ -307,7 +308,7 @@ body[dir="rtl"] .book-menu {
     position: absolute;
     top: 0;
     margin: $padding-8;
-    margin-inline-start: calc(100% - #{$padding-16 + $padding-8});
+    margin-inline-start: calc(100% - #{$padding-24});
 
     width: $padding-16;
     height: $padding-16;
@@ -319,12 +320,27 @@ body[dir="rtl"] .book-menu {
     @include spin(1s);
   }
 
-  ul a {
-    padding-bottom: 0;
+  #book-search-results {
+    position: absolute;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: $border-radius;
+    z-index: 11;
+
+    a {
+      font-size: $font-size-14;
+      padding: $padding-8;
+    }
   }
 
-  small {
-    opacity: 0.5;
+  .book-search-more {
+    border-top: 1px solid var(--gray-200);
+
+    a {
+      color: var(--color-link);
+      font-size: $font-size-12;
+      font-weight: 500;
+    }
   }
 }
 

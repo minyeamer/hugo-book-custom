@@ -41,8 +41,10 @@
 
 ## Site Integration
 - [x] Add home page.
-- [x] Add search pages (or style search area in the menu).
-- [ ] Add category pages (or style category area in the menu).
+- [x] Add search pages.
+- [x] Improve search input.
+- [x] Add category pages.
+- [x] Improve category menu.
 - [x] Add tag pages with the tag list page.
 - [ ] Show the 5 most recent posts in the menu.
 - [ ] Add navigation buttons at the bottom of current article to move between articles by created time.

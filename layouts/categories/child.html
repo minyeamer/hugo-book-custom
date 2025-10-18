@@ -1,0 +1,70 @@
+{{ define "main" }}
+<article class="markdown book-article">
+
+  {{ $categoryPath := .Params.category_path }}
+  {{ $allPages := slice }}
+
+  {{ range .Site.RegularPages }}
+    {{ if .Params.categories }}
+      {{ $categories := .Params.categories }}
+      {{ $typeStr := printf "%T" $categories }}
+      {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
+        {{ $matches := true }}
+        {{ if ne (len $categories) (len $categoryPath) }}
+          {{ $matches = false }}
+        {{ else }}
+          {{ range $index, $segment := $categoryPath }}
+            {{ if ne (index $categories $index) $segment }}
+              {{ $matches = false }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+
+        {{ if $matches }}
+          {{ $allPages = $allPages | append . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <div class="list-header">
+    <h1><i class="fa-solid fa-file"></i> {{ .Title }}</h1>
+    <p>전체 글 <em class="list-count">{{ len $allPages }}</em></p>
+  </div>
+
+  {{ if eq (len $categoryPath) 2 }}
+  <div class="categories-section">
+    <h2>상위 카테고리</h2>
+    <div class="category-chips">
+      {{ $parentCategory := index $categoryPath 0 }}
+      {{ $parentUrl := printf "/categories/%s/" ($parentCategory | urlize) }}
+      <div class="category-item">
+        <a href="{{ $parentUrl }}" class="category-link">
+          <span class="category-name"><i class="fa-solid fa-folder-open"></i> {{ $parentCategory }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+
+  {{ if $allPages }}
+  <div class="post-list">
+    {{ $paginator := .Paginate $allPages 10 }}
+    <div class="post-list">
+      {{ range $paginator.Pages }}
+        {{ partial "docs/post-item.html" . }}
+      {{ end }}
+    </div>
+
+    {{ if gt $paginator.TotalPages 1 }}
+      {{ partial "docs/pagination/index.html" $paginator }}
+    {{ end }}
+  </div>
+  {{ else }}
+  <div class="post-list empty-list">
+    <p>이 카테고리에 게시글이 없습니다.</p>
+  </div>
+  {{ end }}
+
+</article>
+{{ end }}

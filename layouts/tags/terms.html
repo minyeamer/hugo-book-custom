@@ -5,7 +5,7 @@
     <p>전체 태그 <em class="list-count">{{ len .Data.Terms }}</em></p>
   </div>
 
-  <div class="tags-cloud">
+  <div class="tag-chips">
     {{ range .Data.Terms.ByCount }}
     <div class="tag-item">
       <a href="{{ .Page.RelPermalink }}" class="tag-link">

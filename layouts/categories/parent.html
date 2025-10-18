@@ -1,0 +1,81 @@
+{{ define "main" }}
+<article class="markdown book-article">
+
+  {{ $categoryPath := .Params.category_path }}
+  {{ $parentCategory := index $categoryPath 0 }}
+
+  {{ $subCategories := slice }}
+  {{ range .Site.RegularPages }}
+    {{ if .Params.categories }}
+      {{ $categories := .Params.categories }}
+      {{ if reflect.IsSlice $categories }}
+        {{ if ge (len $categories) 2 }}
+          {{ $category0 := index $categories 0 }}
+          {{ $category1 := index $categories 1 }}
+          {{ if eq $category0 $parentCategory }}
+            {{ if not (in $subCategories $category1) }}
+              {{ $subCategories = $subCategories | append $category1 }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $allPages := slice }}
+  {{ range .Site.RegularPages }}
+    {{ if .Params.categories }}
+      {{ $categories := .Params.categories }}
+      {{ if reflect.IsSlice $categories }}
+        {{ if ge (len $categories) 1 }}
+          {{ $category0 := index $categories 0 }}
+          {{ if eq $category0 $parentCategory }}
+            {{ $allPages = $allPages | append . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <div class="list-header">
+    <h1><i class="fa-solid fa-folder"></i> {{ .Title }}</h1>
+    <p>전체 글 <em class="list-count">{{ len $allPages }}</em></p>
+  </div>
+
+  {{ if $subCategories }}
+  <div class="categories-section">
+    <h2>하위 카테고리</h2>
+    <div class="category-chips">
+      {{ range $subCategory := $subCategories }}
+      {{ $subPath := printf "/categories/%s/%s" (delimit $categoryPath "/" | lower) ($subCategory | urlize) }}
+      <div class="category-item">
+        <a href="{{ $subPath }}/" class="category-link">
+          <span class="category-name"><i class="fa-solid fa-file"></i> {{ $subCategory }}</span>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{ if $allPages }}
+  <div class="post-list">
+    {{ $paginator := .Paginate $allPages 10 }}
+    <div class="post-list">
+      {{ range $paginator.Pages }}
+        {{ partial "docs/post-item.html" . }}
+      {{ end }}
+    </div>
+
+    {{ if gt $paginator.TotalPages 1 }}
+      {{ partial "docs/pagination/index.html" $paginator }}
+    {{ end }}
+  </div>
+  {{ else }}
+  <div class="post-list empty-list">
+    <p>이 카테고리에 게시글이 없습니다.</p>
+  </div>
+  {{ end }}
+
+</article>
+{{ end }}

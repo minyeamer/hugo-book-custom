@@ -88,17 +88,26 @@
       return;
     }
 
-    const searchHits = window.bookSearchIndex.search(input.value).slice(0,10);
-    searchHits.forEach(function (page) {
-      const li = element('<li><a href></a><small></small></li>');
-      const a = li.querySelector('a'), small = li.querySelector('small');
+    const searchHits = window.bookSearchIndex.search(input.value);
+    const searchPreview = searchHits.slice(0, 3);
+
+    searchPreview.forEach(function (page) {
+      const li = element('<li><a href></a></li>');
+      const a = li.querySelector('a')
 
       a.href = page.item.href;
       a.textContent = page.item.title;
-      small.textContent = page.item.section;
 
       results.appendChild(li);
     });
+
+    if (searchHits.length > 3) {
+      const moreLink = element('<li class="book-search-more"><a href></a></li>');
+      const a = moreLink.querySelector('a');
+      a.href = '{{ "/search/" | relURL }}?q=' + encodeURIComponent(input.value);
+      a.textContent = '더보기 (총 ' + searchHits.length + '개)';
+      results.appendChild(moreLink);
+    }
   }
 
   /**

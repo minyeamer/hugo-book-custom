@@ -68,19 +68,6 @@
   time {
     font-weight: 500;
   }
-
-  .post-categories {
-    display: flex;
-    gap: 0.5rem;
-
-    .category {
-      background: var(--gray-200);
-      color: var(--body-font-color);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-    }
-  }
 }
 
 .post-title {
@@ -114,6 +101,23 @@
   display: none;
 }
 
+.post-categories {
+  display: flex;
+  gap: 0.5rem;
+
+  .category {
+    background: var(--gray-200);
+    color: var(--body-font-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+
+    .fa-file, .fa-folder {
+      font-size: 0.8rem;
+    }
+  }
+}
+
 .post-tags {
   display: flex;
   flex-wrap: wrap;
@@ -126,6 +130,28 @@
     font-size: 0.8rem;
     border: 1px solid var(--gray-200);
     border-radius: 4px;
+  }
+}
+
+.markdown .category,
+.markdown .category-link,
+.markdown .tag,
+.markdown .tag-link {
+
+  &[href] {
+    color: var(--body-font-color);
+    background: var(--gray-200);
+    border-radius: $border-radius;
+  }
+
+  &[href]:visited {
+    color: var(--body-font-color);
+  }
+
+  &[href]:hover {
+    background: var(--color-page-link);
+    color: var(--body-font-color);
+    text-decoration: none;
   }
 }
 
@@ -147,6 +173,156 @@
   }
 }
 
+/* Categories Menu */
+
+.book-categories {
+  margin: $padding-16 0;
+  padding-bottom: $padding-16;
+  border-bottom: 1px solid var(--gray-500);
+  position: relative;
+  z-index: 1;
+
+  i.fa-file, i.fa-folder, i.fa-chevron-down, i.fa-chevron-up {
+    font-size: $font-size-14;
+    transition: transform 0.2s ease;
+    max-width: $font-size-18;
+  }
+
+  .category-count {
+    font-size: $font-size-12;
+    color: var(--gray-500);
+    white-space: nowrap;
+    text-align: left;
+    margin: 0;
+  }
+
+  .categories-toggle {
+    display: flex;
+    align-items: center;
+    padding: $padding-4 $padding-8;
+    min-height: 2.381rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .categories-link:hover {
+    color: var(--color-link);
+    background-color: rgba(0, 85, 187, 0.1);
+  }
+
+  // Toggle root category
+  #categories-control:checked + .categories-toggle .categories-arrow {
+    transform: rotate(180deg);
+  }
+
+  #categories-control:checked ~ .categories-menu {
+    max-height: 1000px;
+  }
+
+  // Toggle hierarchical categories
+  input[id^="cat-"]:checked + .categories-toggle .categories-arrow {
+    transform: rotate(180deg);
+  }
+}
+
+/* Categories List */
+
+.categories-tree {
+  overflow: auto hidden;
+  white-space: nowrap;
+
+  ul {
+    padding-left: 2.4em;
+    list-style-type: none;
+  }
+
+  .category-count {
+    color: var(--gray-500);
+    font-size: $font-size-14;
+    white-space: nowrap;
+  }
+}
+
+.categories-list {
+  li {
+    position: relative;
+
+    &::before {
+      content: " ";
+      position: absolute;
+      top: 2.4em;
+      left: 0.1em;
+      width: 0.2em;
+      height: calc(100% - 2.4em);
+      background: var(--gray-200);
+    }
+  }
+
+  .category-item {
+    color: var(--body-font-color);
+    font-size: 1.2em;
+    text-decoration: none;
+    padding: 0.2em 0;
+    display: block;
+
+    .fa-file, .fa-folder {
+      font-size: 1.2em;
+    }
+  }
+}
+
+.category-posts {
+  margin-top: 0.5em;
+
+  .category-post {
+    color: var(--body-font-color);
+    text-decoration: none;
+    font-size: 1em;
+    padding: 0.1em 0;
+    display: block;
+
+    .fa-newspaper {
+      font-size: 1em;
+    }
+  }
+
+  .category-post.more {
+    font-style: italic;
+    color: var(--gray-500);
+  }
+}
+
+/* Categories Page */
+
+.categories-section {
+  margin-bottom: $padding-40;
+}
+
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $padding-8;
+
+  .category-link {
+    display: flex;
+    align-items: center;
+    gap: $padding-4;
+    padding: $padding-8 $padding-12;
+
+    .category-name {
+      font-weight: 500;
+
+      .fa-file, .fa-folder, .fa-folder-open {
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
+
+.empty-list p {
+  text-align: center;
+}
+
 /* Tags List */
 
 .post-tags {
@@ -162,7 +338,7 @@
   }
 }
 
-.tags-cloud {
+.tag-chips {
   display: flex;
   flex-wrap: wrap;
   gap: $padding-8;
@@ -181,26 +357,6 @@
       font-size: $font-size-12;
       opacity: 0.7;
     }
-  }
-}
-
-.markdown .tag,
-.markdown .tag-link {
-
-  &[href] {
-    color: var(--body-font-color);
-    background: var(--gray-200);
-    border-radius: $border-radius;
-  }
-
-  &[href]:visited {
-    color: var(--body-font-color);
-  }
-
-  &[href]:hover {
-    background: var(--color-page-link);
-    color: var(--body-font-color);
-    text-decoration: none;
   }
 }
 

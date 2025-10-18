@@ -5,11 +5,11 @@
     </a>
   </div>
   <div class="sidebar-social">
-    <a href="{{ .Site.Params.linkedin }}" target="_blank" title="LinkedIn" {{ if not .Site.Params.linkedin }}class="disabled"{{ end }}>
-      <i class="fa-brands fa-linkedin"></i>
-    </a>
     <a href="{{ .Site.Params.github }}" target="_blank" title="GitHub" {{ if not .Site.Params.github }}class="disabled"{{ end }}>
       <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="{{ "/categories/" | relURL }}" title="Categories">
+      <i class="fa-solid fa-folder"></i>
     </a>
     <a href="{{ "/tags/" | relURL }}" title="Tags">
       <i class="fa-solid fa-tags"></i>

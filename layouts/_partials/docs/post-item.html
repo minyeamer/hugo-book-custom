@@ -7,8 +7,27 @@
     {{ if .Params.categories }}
     <div class="post-categories">
       {{ $categories := .Params.categories }}
-      {{ range (slice $categories) }}
-      <span class="category">{{ . }}</span>
+      {{ $typeStr := printf "%T" $categories }}
+      {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
+        {{ range $index, $category := $categories }}
+          {{ $categoryPath := "" }}
+          {{ range $i, $c := (first (add $index 1) $categories) }}
+            {{ if eq $i 0 }}
+              {{ $categoryPath = $c | urlize }}
+            {{ else }}
+              {{ $categoryPath = printf "%s/%s" $categoryPath ($c | urlize) }}
+            {{ end }}
+          {{ end }}
+          <a href="{{ "/categories/" | relURL }}{{ $categoryPath }}/" class="category">
+            {{ if eq $index 0 }}
+              <i class="fa-solid fa-folder"></i> {{ $category }}
+            {{ else }}
+              <i class="fa-solid fa-file"></i> {{ $category }}
+            {{ end }}
+          </a>
+        {{ end }}
+      {{ else }}
+        <a href="{{ "/categories/" | relURL }}{{ $categories | urlize }}/" class="category">{{ $categories }}</a>
       {{ end }}
     </div>
     {{ end }}
