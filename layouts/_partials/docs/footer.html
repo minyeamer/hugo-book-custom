@@ -21,7 +21,11 @@
 
 </div>
 
-{{ partial "docs/prev-next" . }}
+{{ if eq .Section "post" }}
+  {{ partial "docs/post-prev-next" . }}
+{{ else }}
+  {{ partial "docs/prev-next" . }}
+{{ end }}
 
 {{ $script := resources.Get "clipboard.js" | resources.Minify }}
 {{ with $script.Content }}

@@ -627,3 +627,85 @@
 .book-brand {
   margin-top: $padding-16;
 }
+
+/* Post Navigation */
+
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 0;
+  margin-top: $padding-24;
+  padding-top: $padding-24;
+  border-top: 1px solid var(--gray-200);
+  overflow: hidden;
+
+  @media screen and (max-width: $body-breakpoint) {
+    flex-direction: column;
+  }
+
+  .post-nav-link {
+    display: block;
+    background: var(--gray-100);
+    padding: $padding-12;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    flex: 1;
+    max-width: 50%;
+
+    &:hover {
+      background: var(--link-background);
+    }
+
+    @media screen and (max-width: $body-breakpoint) {
+      max-width: 100%;
+    }
+  }
+
+  .post-nav-prev {
+    text-align: left;
+    border-radius: 8px 0 0 8px;
+
+    @media screen and (max-width: $body-breakpoint) {
+      border-radius: 8px;
+    }
+  }
+
+  .post-nav-next {
+    text-align: right;
+    border-radius: 0 8px 8px 0;
+
+    @media screen and (max-width: $body-breakpoint) {
+      border-radius: 8px;
+    }
+  }
+
+  .post-nav-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .post-nav-direction {
+    display: block;
+    color: var(--gray-500);
+    font-size: $font-size-14;
+    font-weight: 600;
+    margin-bottom: $padding-8;
+
+    .fa-backward, .fa-forward {
+      font-size: $font-size-14;
+    }
+  }
+
+  .post-nav-title {
+    display: block;
+    color: var(--body-font-color);
+    font-size: $font-size-16;
+    font-weight: 400;
+    line-height: 1.5;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

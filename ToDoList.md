@@ -47,7 +47,7 @@
 - [x] Improve category menu.
 - [x] Add tag pages with the tag list page.
 - [x] Show the 5 most recent posts in the menu.
-- [ ] Add navigation buttons at the bottom of current article to move between articles by created time.
+- [x] Add bottom navigation for posts within same categories by creation time.
 - [ ] Integrate comment functionality (Utterances)
 - [ ] Add social sharing buttons at the bottom of current article.
 - [ ] Integrate visitor statistics with GA4.
