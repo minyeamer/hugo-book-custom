@@ -89,13 +89,13 @@ https://github.com/alex-shpak/hugo-book
 {{ end -}}
 
 <!-- Google Analytics -->
-{{- if and hugo.IsProduction .Site.GoogleAnalytics }}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.GoogleAnalytics }}"></script>
+{{- if and hugo.IsProduction .Site.Params.GoogleAnalytics.tagId }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.GoogleAnalytics.tagId }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', '{{ .Site.GoogleAnalytics }}');
+  gtag('config', '{{ .Site.Params.GoogleAnalytics.tagId }}');
 </script>
 {{- end -}}
 
