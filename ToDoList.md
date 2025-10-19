@@ -54,4 +54,4 @@
 - [x] Add category pages.
 - [x] Add tag pages with the tag list page.
 - [ ] Add social sharing buttons at the bottom of current article.
-- [ ] Integrate visitor statistics with GA4.
+- [x] Apply Google Analytics 4.

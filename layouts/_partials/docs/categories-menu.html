@@ -4,7 +4,7 @@
   <label for="categories-control" class="categories-toggle categories-link">
     <a href="/categories/">
       <i class="fa-solid fa-folder"></i>
-      <span>{{ default "Categories" .Site.Params.categoriesLabel }}</span>
+      <span>{{ default "Categories" .Site.Params.BookMenu.categoriesLabel }}</span>
       <span class="category-count">({{ len .Site.RegularPages }})</span>
     </a>
     <i class="fa-solid fa-chevron-down categories-arrow"></i>

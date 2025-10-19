@@ -4,11 +4,44 @@ https://github.com/alex-shpak/hugo-book
 {{ "-->" | safeHTML }}
 
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{- if hugo.IsProduction | and (ne .Params.robotsNoIndex true) }}
+<meta name="robots" content="index, follow">
+{{- else }}
+<meta name="robots" content="noindex, nofollow">
+{{- end }}
+
+{{- if .IsHome }}
+{{ with site.Params.keywords -}}
+<meta name="keywords" content="{{- range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">
+{{ end }}
+{{- else }}
+<meta name="keywords" content="{{ if .Params.keywords -}}
+    {{- range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- else }}
+    {{- range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- end -}}">
+{{- end }}
 <meta name="description" content="{{ default .Summary .Description }}">
+<meta name="author" content="{{ (partial "docs/author.html" . ) }}">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark">
+
+<link rel="canonical" href="{{ if .Params.canonicalURL -}} {{ trim .Params.canonicalURL " " }} {{- else -}} {{ .Permalink }} {{- end }}">
+
+<!-- Search Engine Verification Tags -->
+{{- with .Site.Params.SearchEngine.google.SiteVerificationTag }}
+<meta name="google-site-verification" content="{{ . }}" />
+{{- end }}
+{{- with .Site.Params.SearchEngine.naver.SiteVerificationTag }}
+<meta name="naver-site-verification" content="{{ . }}" />
+{{- end }}
+{{- with .Site.Params.SearchEngine.bing.SiteVerificationTag }}
+<meta name="msvalidate.01" content="{{ . }}" />
+{{- end }}
+{{- with .Site.Params.SearchEngine.yandex.SiteVerificationTag }}
+<meta name="yandex-verification" content="{{ . }}" />
+{{- end }}
 
 {{- with .Page.Params.BookHref -}}
   <meta http-equiv="Refresh" content="0; url='{{ . }}'" />
@@ -55,7 +88,16 @@ https://github.com/alex-shpak/hugo-book
   <script defer src="{{ $swJS.RelPermalink }}" {{ template "integrity" $swJS }}></script>
 {{ end -}}
 
-{{- template "_internal/google_analytics.html" . -}}
+<!-- Google Analytics -->
+{{- if and hugo.IsProduction .Site.GoogleAnalytics }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.GoogleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.GoogleAnalytics }}');
+</script>
+{{- end -}}
 
 <!-- RSS -->
 {{- with .OutputFormats.Get "rss" -}}

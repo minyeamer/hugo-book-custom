@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTheme(!isDarkTheme());
       loadHighlightTheme();
 
-      if (typeof window.reloadDisqus === 'function') {
+      if (window.DISQUS && typeof window.reloadDisqus === 'function') {
         window.reloadDisqus();
       }
     });
