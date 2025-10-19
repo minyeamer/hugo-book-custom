@@ -234,6 +234,15 @@
 
 /* Categories List */
 
+.categories-header {
+  text-align: center;
+  margin-bottom: $padding-48;
+
+  h1 {
+    font-size: $font-size-40;
+  }
+}
+
 .categories-tree {
   overflow: auto hidden;
   white-space: nowrap;

@@ -12,6 +12,7 @@
 - [x] When the ToC is hidden and the menu is visible, disable only the menu icon in the header.
 - [x] ~~Keep the header always visible and disable icons in the header when both menu and ToC are displayed.~~
 - [x] Make the header title link back to the homepage.
+- [x] Add post header with categories, title, and date.
 
 ## Footer
 - [x] Add bottom navigation for posts within same categories by creation time.

@@ -85,6 +85,7 @@
 
 {{ define "main" }}
   <article class="markdown book-article">
+    {{ partial "docs/post-header" . }}
     {{- .Content -}}
   </article>
 {{ end }}

@@ -1,0 +1,43 @@
+{{ if eq .Section "post" }}
+<header class="post-header">
+
+  {{ if .Params.categories }}
+  <div class="post-header-category">
+    {{ $categories := .Params.categories }}
+    {{ $typeStr := printf "%T" $categories }}
+    {{ $categoryPath := "" }}
+    {{ $categoryDisplay := "" }}
+
+    {{/* Build full category path for URL */}}
+    {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
+      {{ range $index, $category := $categories }}
+        {{ if eq $index 0 }}
+          {{ $categoryPath = $category | urlize }}
+          {{ $categoryDisplay = $category }}
+        {{ else }}
+          {{ $categoryPath = printf "%s/%s" $categoryPath ($category | urlize) }}
+          {{ $categoryDisplay = printf "%s/%s" $categoryDisplay $category }}
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      {{ $categoryPath = $categories | urlize }}
+      {{ $categoryDisplay = $categories }}
+    {{ end }}
+
+    <a href="{{ "/categories/" | relURL }}{{ $categoryPath }}/" class="post-header-category-link">
+      {{ $categoryDisplay }}
+    </a>
+  </div>
+  {{ end }}
+
+  <h1 class="post-header-title">{{ .Title }}</h1>
+
+  {{ with .Date }}
+  <div class="post-header-date">
+    <time datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+      {{ .Format "2006. 1. 2. 15:04" }}
+    </time>
+  </div>
+  {{ end }}
+</header>
+{{ end }}
