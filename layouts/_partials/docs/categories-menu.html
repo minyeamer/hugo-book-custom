@@ -5,7 +5,7 @@
     <a href="/categories/">
       <i class="fa-solid fa-folder"></i>
       <span>{{ default "Categories" .Site.Params.BookMenu.categoriesLabel }}</span>
-      <span class="category-count">({{ len .Site.RegularPages }})</span>
+      <span class="category-count">({{ len (where .Site.RegularPages "Section" "post") }})</span>
     </a>
     <i class="fa-solid fa-chevron-down categories-arrow"></i>
   </label>
@@ -15,7 +15,7 @@
     {{ $categoryCount := dict }}
 
     {{/* Build category tree and count posts for 2 levels only */}}
-    {{ range .Site.RegularPages }}
+    {{ range (where .Site.RegularPages "Section" "post") }}
       {{ if .Params.categories }}
         {{ $categories := .Params.categories }}
         {{ $typeStr := printf "%T" $categories }}
@@ -63,7 +63,7 @@
       {{ $categoryCount1 := 0 }}
 
       {{/* Count all posts that start with this category */}}
-      {{ range $.Site.RegularPages }}
+      {{ range (where $.Site.RegularPages "Section" "post") }}
         {{ if .Params.categories }}
           {{ $categories := .Params.categories }}
           {{ $typeStr := printf "%T" $categories }}
@@ -98,7 +98,7 @@
             {{ $categoryCount2 := 0 }}
 
             {{/* Count posts that have exactly this category combination */}}
-            {{ range $.Site.RegularPages }}
+            {{ range (where $.Site.RegularPages "Section" "post") }}
               {{ if .Params.categories }}
                 {{ $categories := .Params.categories }}
                 {{ $typeStr := printf "%T" $categories }}
