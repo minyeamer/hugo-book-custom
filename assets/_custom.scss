@@ -9,18 +9,6 @@
   h1 {
     font-size: $font-size-40;
     margin-bottom: $padding-8;
-
-    a.site-title {
-      &:visited {
-        color: var(--body-font-color);
-        text-decoration: none;
-      }
-
-      &:hover {
-        color: var(--body-font-color);
-        text-decoration: none;
-      }
-    }
   }
 
   p {

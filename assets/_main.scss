@@ -220,9 +220,20 @@ body[dir="rtl"] .book-menu {
     text-overflow: ellipsis;
     margin: 0 $padding-16;
   }
+}
 
-  .site-title {
+.markdown .site-title,
+.book-header .site-title {
+  &[href] {
     color: var(--body-font-color);
+  }
+
+  &[href]:visited {
+    color: var(--body-font-color);
+  }
+
+  &[href]:hover {
+    text-decoration: none;
   }
 }
 
