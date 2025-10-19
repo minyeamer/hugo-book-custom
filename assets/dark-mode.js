@@ -33,14 +33,17 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 
-  // 초기 테마 설정
   setTheme(getPreferredTheme());
   loadHighlightTheme();
-  
+
   if (toggleBtn) {
     toggleBtn.addEventListener('click', function() {
       setTheme(!isDarkTheme());
       loadHighlightTheme();
+
+      if (typeof window.reloadDisqus === 'function') {
+        window.reloadDisqus();
+      }
     });
   }
 });

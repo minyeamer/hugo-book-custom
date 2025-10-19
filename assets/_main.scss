@@ -544,6 +544,11 @@ body[dir="rtl"] .book-menu {
   }
 }
 
+#disqus_thread {
+  color-scheme: none;
+  margin-top: $padding-40;
+}
+
 /* Pagination */
 
 .pagination {

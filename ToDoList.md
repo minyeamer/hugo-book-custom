@@ -17,6 +17,7 @@
 ## Footer
 - [x] Add bottom navigation for posts within same categories by creation time.
 - [x] Add post tags to footer.
+- [x] Set comment functionality (Disqus)
 
 ## Menu
 - [x] Add a profile picture at the top of the menu.
@@ -52,6 +53,5 @@
 - [x] Add search pages.
 - [x] Add category pages.
 - [x] Add tag pages with the tag list page.
-- [ ] Integrate comment functionality (Utterances)
 - [ ] Add social sharing buttons at the bottom of current article.
 - [ ] Integrate visitor statistics with GA4.
