@@ -1,0 +1,106 @@
+{{- $url := .Get 0 -}}
+{{- $title := "" -}}
+{{- $description := "" -}}
+{{- $image := "" -}}
+{{- $siteName := "" -}}
+
+{{- with resources.GetRemote $url -}}
+  {{- with .Content -}}
+    {{- $content := . | string -}}
+
+    {{- /* Extract og:title */ -}}
+    {{- $titleRegex := `<meta\s+(?:property|name)="(?:og:title|twitter:title)"\s+content="([^"]+)"` -}}
+    {{- /* Closing quote for regex syntax " */ -}}
+    {{- with findRE $titleRegex $content 1 -}}
+      {{- with index . 0 -}}
+        {{- $matches := findRE `content="([^"]+)"` . 1 -}}
+        {{- /* Closing quote for regex syntax " */ -}}
+        {{- with index $matches 0 -}}
+          {{- $title = replaceRE `content="([^"]+)"` "$1" . -}}
+          {{- /* Closing quote for regex syntax " */ -}}
+        {{- end -}}
+      {{- end -}}
+      {{- end -}}
+
+    {{- /* Fallback to <title> tag */ -}}
+    {{- if not $title -}}
+      {{- $titleTagRegex := `<title[^>]*>([^<]+)</title>` -}}
+      {{- with findRE $titleTagRegex $content 1 -}}
+        {{- with index . 0 -}}
+          {{- $title = replaceRE `<title[^>]*>([^<]+)</title>` "$1" . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* Extract og:description */ -}}
+    {{- $descRegex := `<meta\s+(?:property|name)="(?:og:description|twitter:description|description)"\s+content="([^"]+)"` -}}
+    {{- /* Closing quote for regex syntax " */ -}}
+    {{- with findRE $descRegex $content 1 -}}
+      {{- with index . 0 -}}
+        {{- $matches := findRE `content="([^"]+)"` . 1 -}}
+        {{- /* Closing quote for regex syntax " */ -}}
+        {{- with index $matches 0 -}}
+          {{- $description = replaceRE `content="([^"]+)"` "$1" . -}}
+          {{- /* Closing quote for regex syntax " */ -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* Extract og:image */ -}}
+    {{- $imageRegex := `<meta\s+(?:property|name)="(?:og:image|twitter:image)"\s+content="([^"]+)"` -}}
+    {{- /* Closing quote for regex syntax " */ -}}
+    {{- with findRE $imageRegex $content 1 -}}
+      {{- with index . 0 -}}
+        {{- $matches := findRE `content="([^"]+)"` . 1 -}}
+        {{- /* Closing quote for regex syntax " */ -}}
+        {{- with index $matches 0 -}}
+          {{- $image = replaceRE `content="([^"]+)"` "$1" . -}}
+          {{- /* Closing quote for regex syntax " */ -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* Extract og:site_name */ -}}
+    {{- $siteRegex := `<meta\s+property="og:site_name"\s+content="([^"]+)"` -}}
+    {{- /* Closing quote for regex syntax " */ -}}
+    {{- with findRE $siteRegex $content 1 -}}
+      {{- with index . 0 -}}
+        {{- $matches := findRE `content="([^"]+)"` . 1 -}}
+        {{- /* Closing quote for regex syntax " */ -}}
+        {{- with index $matches 0 -}}
+          {{- $siteName = replaceRE `content="([^"]+)"` "$1" . -}}
+          {{- /* Closing quote for regex syntax " */ -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<a href="{{ $url }}" target="_blank" class="link-preview-card">
+  {{- if $image -}}
+  <div class="link-preview-image">
+    <img src="{{ $image }}" alt="{{ $title }}">
+  </div>
+  {{- end -}}
+  <div class="link-preview-content">
+    <h3 class="link-preview-title">
+      {{- if $title -}}
+        {{ $title | truncate 80 }}
+      {{- else -}}
+        {{ $url }}
+      {{- end -}}
+    </h3>
+    {{- if $description -}}
+    <p class="link-preview-description">
+      {{ $description | truncate 120 }}
+    </p>
+    {{- end -}}
+    <small class="link-preview-url">
+      {{- if $siteName -}}
+        {{ $siteName }}
+      {{- else -}}
+        {{ $url | replaceRE "^https?://([^/]+).*" "$1" }}
+      {{- end -}}
+    </small>
+  </div>
+</a>
