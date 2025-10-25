@@ -21,7 +21,17 @@ https://github.com/alex-shpak/hugo-book
     {{- range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- else }}
     {{- range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- end -}}">
 {{- end }}
-<meta name="description" content="{{ default .Summary .Description }}">
+
+{{- $description := "" }}
+{{- if .Description }}
+  {{- $description = .Description }}
+{{- else if .IsPage }}
+  {{- $description = .Summary }}
+{{- else if site.Params.description }}
+  {{- $description = site.Params.description }}
+{{- end }}
+<meta name="description" content="{{ $description | plainify | replaceRE `\s+` " " | truncate 100 }}">
+
 <meta name="author" content="{{ (partial "docs/author.html" . ) }}">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
@@ -54,7 +64,14 @@ https://github.com/alex-shpak/hugo-book
   <meta http-equiv="Refresh" content="0; url='{{ . }}'" />
 {{- end -}}
 
-{{- template "_internal/opengraph.html" . -}}
+{{- /* SEO: OpenGraph tags */ -}}
+{{- partial "templates/opengraph.html" . -}}
+
+{{- /* SEO: Twitter Cards */ -}}
+{{- partial "templates/twitter_cards.html" . -}}
+
+{{- /* SEO: Schema.org JSON-LD */ -}}
+{{- partial "templates/schema_json.html" . -}}
 
 <title>{{ partial "docs/html-head-title" . }}</title>
 {{ partial "docs/html-head-favicon" . }}
