@@ -630,7 +630,7 @@
   border-top: 1px solid var(--gray-200);
   overflow: hidden;
 
-  @media screen and (max-width: $body-breakpoint) {
+  @media screen and (max-width: $narrow-breakpoint) {
     flex-direction: column;
   }
 
@@ -647,7 +647,7 @@
       background: var(--link-background);
     }
 
-    @media screen and (max-width: $body-breakpoint) {
+    @media screen and (max-width: $narrow-breakpoint) {
       max-width: 100%;
     }
   }
@@ -656,7 +656,7 @@
     text-align: left;
     border-radius: 8px 0 0 8px;
 
-    @media screen and (max-width: $body-breakpoint) {
+    @media screen and (max-width: $narrow-breakpoint) {
       border-radius: 8px;
     }
   }
@@ -665,7 +665,7 @@
     text-align: right;
     border-radius: 0 8px 8px 0;
 
-    @media screen and (max-width: $body-breakpoint) {
+    @media screen and (max-width: $narrow-breakpoint) {
       border-radius: 8px;
     }
   }

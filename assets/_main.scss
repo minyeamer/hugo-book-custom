@@ -174,11 +174,15 @@ body[dir="rtl"] .book-menu {
 
 .book-page {
   flex: 1 1 0;
-  max-width: $body-max-width;
+  max-width: $body-wide-width;
   min-width: $body-min-width;
   margin: 0 auto;
   flex-grow: 1;
   padding: $padding-16;
+
+  i {
+    font-size: $font-size-base;
+  }
 }
 
 .book-post {
@@ -203,6 +207,18 @@ body[dir="rtl"] .book-menu {
       object-fit: cover;
     }
   }
+}
+
+.h1-image {
+  max-height: 2rem;
+}
+
+.h2-image {
+  max-height: 1.5rem;
+}
+
+.h3-image {
+  max-height: 1.25rem;
 }
 
 /* Mobile Header */
@@ -668,7 +684,13 @@ body[dir="rtl"] .book-menu {
   will-change: transform, margin, opacity;
 }
 
-@media screen and (max-width: $full-breakpoint) {
+@media (max-width: $wide-breakpoint) {
+  .book-page {
+    max-width: $body-max-width;
+  }
+}
+
+@media screen and (max-width: $toc-breakpoint) {
   .book-toc {
     visibility: hidden;
   }
@@ -717,7 +739,7 @@ body[dir="rtl"] .book-menu {
   }
 }
 
-@media screen and (max-width: $mobile-breakpoint) {
+@media screen and (max-width: $menu-breakpoint) {
   .book-menu {
     visibility: hidden;
     margin-inline-start: -$menu-width;
