@@ -209,6 +209,18 @@
       margin-top: $padding-16;
     }
   }
+
+  .center-block {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .center-table {
+    text-align: center;
+    margin: 0 auto;
+    display: table;
+  }
 }
 
 .markdown-inner {
