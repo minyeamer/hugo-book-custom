@@ -178,11 +178,10 @@ body[dir="rtl"] .book-menu {
 /* Center Body */
 
 .book-page {
-  flex: 1 1 0;
   max-width: $body-wide-width;
   min-width: $body-min-width;
   margin: 0 auto;
-  flex-grow: 1;
+  flex: 1 1 0;
   padding: $padding-16;
 
   i {
@@ -480,6 +479,7 @@ body[dir="rtl"] .book-menu {
 #TableOfContents {
   margin-top: 2rem;
   padding-left: 1rem;
+  border-left: 1px solid var(--toc-font-color);
 
   a {
     color: var(--toc-font-color);
@@ -489,10 +489,6 @@ body[dir="rtl"] .book-menu {
     color: var(--toc-active-color);
     font-weight: bold;
   }
-}
-
-.book-toc #TableOfContents {
-  border-left: 1px solid var(--toc-font-color);
 }
 
 /* Right Navigation */
