@@ -72,15 +72,20 @@
   ],
   "articleBody": {{ .Content | safeJS | htmlUnescape | plainify }},
   "wordCount" : "{{ .WordCount }}",
-  "inLanguage": {{ .Language.Lang | default "en-us" }},
-  {{ if .Params.cover.image -}}
-  "image":
-    {{- if (ne .Params.cover.relative true) -}}
-    {{ .Params.cover.image | absURL }},
-    {{- else -}}
-    {{ (path.Join .RelPermalink .Params.cover.image ) | absURL }},
-    {{- end}}
+  "inLanguage": {{ .Language.Lang | default "en-us" }}
+  {{- if .Params.cover -}}
+  {{- $coverImage := "" -}}
+  {{- if reflect.IsMap .Params.cover -}}
+    {{- if .Params.cover.image -}}
+      {{- $coverImage = .Params.cover.image -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $coverImage = .Params.cover -}}
   {{- end -}}
+  {{- if $coverImage -}}
+  , "image": "{{ $coverImage | absURL }}"
+  {{- end -}}
+  {{- end -}},
   "datePublished": {{ .PublishDate }},
   "dateModified": {{ .Lastmod }},
   {{- with (.Params.author | default site.Params.author) }}

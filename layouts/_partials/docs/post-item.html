@@ -33,25 +33,51 @@
     {{ end }}
   </div>
 
-  <h2 class="post-title">
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-  </h2>
+  <div class="post-content-area{{ if .Params.cover }} has-cover{{ end }}">
+    <div class="post-text-area">
+      <h2 class="post-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
 
-  {{ if .Summary }}
-  <div class="post-summary">
-    {{ .Summary | plainify | truncate 200 }}
-  </div>
-  <div class="post-summary-mobile">
-    {{ .Summary | plainify | truncate 100 }}
-  </div>
-  {{ end }}
+      {{ $summary := "" }}
+      {{ if .Description }}
+        {{ $summary = .Description }}
+      {{ else if .Summary }}
+        {{ $summary = .Summary }}
+      {{ end }}
+      {{ if $summary }}
+      <div class="post-summary">
+        {{ $summary | plainify | truncate 148 }}
+      </div>
+      <div class="post-summary-mobile">
+        {{ $summary | plainify | truncate 72 }}
+      </div>
+      {{ end }}
 
-  {{ if .Params.tags }}
-  <div class="post-tags">
-    {{ range first 5 .Params.tags }}
-    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">#{{ . }}</a>
+      {{ if .Params.tags }}
+      <div class="post-tags">
+        {{ range first 5 .Params.tags }}
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">#{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+
+    {{ if .Params.cover }}
+    <div class="post-cover">
+      {{- $coverImage := "" -}}
+      {{- if reflect.IsMap .Params.cover -}}
+        {{- if .Params.cover.image -}}
+          {{- $coverImage = .Params.cover.image -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $coverImage = .Params.cover -}}
+      {{- end -}}
+      {{- if $coverImage -}}
+      <img src="{{ $coverImage | absURL }}" alt="Cover Image" class="post-cover-img">
+      {{- end -}}
+    </div>
     {{ end }}
   </div>
-  {{ end }}
 
 </article>
