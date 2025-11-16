@@ -1,12 +1,12 @@
 {{/* Pagination Partial */}}
-{{/* Usage: {{ partial "pagination.html" .Paginator }} */}}
+{{/* Usage: {{ partial "pagination.html" .Paginate }} */}}
 
-{{ $paginator := . }}
-{{ if gt $paginator.TotalPages 1 }}
+{{ $paginate := . }}
+{{ if gt $paginate.TotalPages 1 }}
 <div id="pagination-anchor"></div>
 <nav class="pagination">
-  {{ $currentPage := $paginator.PageNumber }}
-  {{ $totalPages := $paginator.TotalPages }}
+  {{ $currentPage := $paginate.PageNumber }}
+  {{ $totalPages := $paginate.TotalPages }}
 
   <!-- Calculate 10-unit page range -->
   {{ $groupNumber := div (sub $currentPage 1) 10 }}
@@ -22,7 +22,7 @@
 
   <!-- Previous group button -->
   {{ if gt $groupStart 1 }}
-  <a href="{{ $paginator.First.URL }}{{ if gt $prevGroupPage 1 }}page/{{ $prevGroupPage }}/{{ end }}#pagination-anchor" class="pagination-nav pagination-link">
+  <a href="{{ $paginate.First.URL }}{{ if gt $prevGroupPage 1 }}page/{{ $prevGroupPage }}/{{ end }}#pagination-anchor" class="pagination-nav pagination-link">
     <i class="fa-solid fa-backward"></i> 이전
   </a>
   {{ else }}
@@ -37,7 +37,7 @@
       {{ if eq $i $currentPage }}
       <span class="pagination-page current" id="current-page">{{ $i }}</span>
       {{ else }}
-      <a href="{{ $paginator.First.URL }}{{ if gt $i 1 }}page/{{ $i }}/{{ end }}#pagination-anchor" class="pagination-page pagination-link">
+      <a href="{{ $paginate.First.URL }}{{ if gt $i 1 }}page/{{ $i }}/{{ end }}#pagination-anchor" class="pagination-page pagination-link">
         {{ $i }}
       </a>
       {{ end }}
@@ -46,7 +46,7 @@
 
   <!-- Next group button -->
   {{ if le $nextGroupPage $totalPages }}
-  <a href="{{ $paginator.First.URL }}page/{{ $nextGroupPage }}/#pagination-anchor" class="pagination-nav pagination-link">
+  <a href="{{ $paginate.First.URL }}page/{{ $nextGroupPage }}/#pagination-anchor" class="pagination-nav pagination-link">
     다음 <i class="fa-solid fa-forward"></i>
   </a>
   {{ else }}

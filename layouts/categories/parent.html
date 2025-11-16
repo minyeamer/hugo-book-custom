@@ -61,15 +61,15 @@
 
   {{ if $allPages }}
   <div class="post-list">
-    {{ $paginator := .Paginate $allPages 10 }}
+    {{ $paginate := .Paginate $allPages 10 }}
     <div class="post-list">
-      {{ range $paginator.Pages }}
+      {{ range $paginate.Pages }}
         {{ partial "docs/post-item.html" . }}
       {{ end }}
     </div>
 
-    {{ if gt $paginator.TotalPages 1 }}
-      {{ partial "docs/pagination/index.html" $paginator }}
+    {{ if gt $paginate.TotalPages 1 }}
+      {{ partial "docs/pagination/index.html" $paginate }}
     {{ end }}
   </div>
   {{ else }}

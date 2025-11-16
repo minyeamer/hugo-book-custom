@@ -5,14 +5,14 @@
     <p>전체 글 <em class="list-count">{{ len (where .Site.RegularPages "Section" "post") }}</em></p>
   </div>
 
-  {{ $paginator := .Paginate (where .Site.RegularPages "Section" "post") 10 }}
+  {{ $paginate := .Paginate (where .Site.RegularPages "Section" "post") 10 }}
 
   <div class="post-list">
-    {{ range $paginator.Pages }}
+    {{ range $paginate.Pages }}
       {{ partial "docs/post-item.html" . }}
     {{ end }}
   </div>
 
-  {{ partial "docs/pagination/index.html" $paginator }}
+  {{ partial "docs/pagination/index.html" $paginate }}
 </article>
 {{ end }}

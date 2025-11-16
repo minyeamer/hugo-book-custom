@@ -1,13 +1,13 @@
 {{/* Search Pagination Partial */}}
-{{/* Usage: {{ partial "pagination-search.html" (dict "paginator" .Paginator "query" $query) }} */}}
+{{/* Usage: {{ partial "pagination-search.html" (dict "paginate" .Paginator "query" $query) }} */}}
 
-{{ $paginator := .paginator }}
+{{ $paginate := .paginate }}
 {{ $query := .query | default "" }}
-{{ if gt $paginator.TotalPages 1 }}
+{{ if gt $paginate.TotalPages 1 }}
 <div id="pagination-anchor"></div>
 <nav class="pagination">
-  {{ $currentPage := $paginator.PageNumber }}
-  {{ $totalPages := $paginator.TotalPages }}
+  {{ $currentPage := $paginate.PageNumber }}
+  {{ $totalPages := $paginate.TotalPages }}
 
   <!-- Calculate 10-unit page range -->
   {{ $groupNumber := div (sub $currentPage 1) 10 }}
