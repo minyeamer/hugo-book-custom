@@ -47,7 +47,8 @@
     <h2>하위 카테고리</h2>
     <div class="category-chips">
       {{ range $subCategory := $subCategories }}
-      {{ $subPath := printf "/categories/%s/%s" (delimit $categoryPath "/" | lower) ($subCategory | urlize) }}
+      {{ $parentPath := index $categoryPath 0 | urlize }}
+      {{ $subPath := printf "/categories/%s/%s" $parentPath ($subCategory | urlize) }}
       <div class="category-item">
         <a href="{{ $subPath }}/" class="category-link">
           <span class="category-name"><i class="fa-solid fa-file"></i> {{ $subCategory }}</span>
