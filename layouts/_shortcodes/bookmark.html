@@ -76,14 +76,14 @@
   {{- end -}}
 {{- end -}}
 
-<a href="{{ $url }}" target="_blank" class="link-preview-card">
+<a href="{{ $url }}" target="_blank" class="bookmark-card">
   {{- if $image -}}
-  <div class="link-preview-image">
+  <div class="bookmark-image">
     <img src="{{ $image }}" alt="{{ $title }}">
   </div>
   {{- end -}}
-  <div class="link-preview-content">
-    <h3 class="link-preview-title">
+  <div class="bookmark-content">
+    <h3 class="bookmark-title">
       {{- if $title -}}
         {{ $title | truncate 80 }}
       {{- else -}}
@@ -91,11 +91,11 @@
       {{- end -}}
     </h3>
     {{- if $description -}}
-    <p class="link-preview-description">
+    <p class="bookmark-description">
       {{ $description | truncate 120 }}
     </p>
     {{- end -}}
-    <small class="link-preview-url">
+    <small class="bookmark-url">
       {{- if $siteName -}}
         {{ $siteName }}
       {{- else -}}
