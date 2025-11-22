@@ -65,13 +65,13 @@ https://github.com/alex-shpak/hugo-book
 {{- end -}}
 
 {{- /* SEO: OpenGraph tags */ -}}
-{{- partial "templates/opengraph.html" . -}}
+{{- partial "docs/seo/opengraph.html" . -}}
 
 {{- /* SEO: Twitter Cards */ -}}
-{{- partial "templates/twitter_cards.html" . -}}
+{{- partial "docs/seo/twitter_cards.html" . -}}
 
 {{- /* SEO: Schema.org JSON-LD */ -}}
-{{- partial "templates/schema_json.html" . -}}
+{{- partial "docs/seo/schema_json.html" . -}}
 
 <title>{{ partial "docs/html-head-title" . }}</title>
 {{ partial "docs/html-head-favicon" . }}
