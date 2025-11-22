@@ -4,7 +4,7 @@
   {{ $currentCategories := partial "categories/value" (slice .Params.parent .Title) }}
   {{ $pages := slice }}
 
-  {{ range where .Site.RegularPages "Section" "post" }}
+  {{ range where .Site.RegularPages "Section" "posts" }}
     {{ $pageCategories := partial "categories/value" .Params.categories }}
 
     {{ if eq $currentCategories $pageCategories }}

@@ -76,7 +76,7 @@
 {{ end }}
 
 {{ define "comments" }}
-  {{ if and (eq .Section "post") (default false .Site.Params.BookComments.enable) }}
+  {{ if and (eq .Section "posts") (default false .Site.Params.BookComments.enable) }}
   <div class="book-comments">
     {{- partial "docs/comments" . -}}
   </div>
