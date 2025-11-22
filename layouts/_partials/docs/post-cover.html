@@ -1,15 +1,5 @@
 {{ if .Params.cover }}
 <div class="book-cover">
-  {{- $coverImage := "" -}}
-  {{- if reflect.IsMap .Params.cover -}}
-    {{- if .Params.cover.image -}}
-      {{- $coverImage = .Params.cover.image -}}
-    {{- end -}}
-  {{- else -}}
-    {{- $coverImage = .Params.cover -}}
-  {{- end -}}
-  {{- if $coverImage -}}
-  <img src="{{ $coverImage | absURL }}" alt="Cover Image" class="book-cover-img">
-  {{- end -}}
+  <img src="{{ .Params.cover | absURL }}" alt="Cover Image" class="book-cover-img">
 </div>
 {{ end }}

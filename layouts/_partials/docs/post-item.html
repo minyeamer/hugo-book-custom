@@ -6,29 +6,19 @@
     </time>
     {{ if .Params.categories }}
     <div class="post-categories">
-      {{ $categories := .Params.categories }}
-      {{ $typeStr := printf "%T" $categories }}
-      {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
-        {{ range $index, $category := $categories }}
-          {{ $categoryPath := "" }}
-          {{ range $i, $c := (first (add $index 1) $categories) }}
-            {{ if eq $i 0 }}
-              {{ $categoryPath = $c | urlize }}
-            {{ else }}
-              {{ $categoryPath = printf "%s/%s" $categoryPath ($c | urlize) }}
-            {{ end }}
-          {{ end }}
-          <a href="{{ "/categories/" | relURL }}{{ $categoryPath }}/" class="category">
-            {{ if eq $index 0 }}
-              <i class="fa-solid fa-folder"></i> {{ $category }}
-            {{ else }}
-              <i class="fa-solid fa-file"></i> {{ $category }}
-            {{ end }}
-          </a>
-        {{ end }}
-      {{ else }}
-        <a href="{{ "/categories/" | relURL }}{{ $categories | urlize }}/" class="category">{{ $categories }}</a>
-      {{ end }}
+      {{ $parentCategory := partial "categories/value-first" .Params.categories }}
+      {{- if $parentCategory -}}
+        <a href="{{ "/categories/" | relURL }}{{ $parentCategory | urlize }}/" class="category">
+          <i class="fa-solid fa-folder"></i> {{ $parentCategory }}
+        </a>
+
+        {{ $childCategory := partial "categories/value-second" .Params.categories }}
+        {{- if $childCategory -}}
+        <a href="{{ "/categories/" | relURL }}{{ $parentCategory | urlize }}/{{ $childCategory | urlize }}/" class="category">
+        <i class="fa-solid fa-file"></i> {{ $childCategory }}
+        </a>
+        {{- end -}}
+      {{- end -}}
     </div>
     {{ end }}
   </div>
@@ -39,12 +29,7 @@
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
       </h2>
 
-      {{ $summary := "" }}
-      {{ if .Description }}
-        {{ $summary = .Description }}
-      {{ else if .Summary }}
-        {{ $summary = .Summary }}
-      {{ end }}
+      {{- $summary := cond .Description .Description (cond .Summary .Summary "") -}}
       {{ if $summary }}
       <div class="post-summary">
         {{ $summary | plainify | truncate 148 }}
@@ -65,17 +50,7 @@
 
     {{ if .Params.cover }}
     <div class="post-cover">
-      {{- $coverImage := "" -}}
-      {{- if reflect.IsMap .Params.cover -}}
-        {{- if .Params.cover.image -}}
-          {{- $coverImage = .Params.cover.image -}}
-        {{- end -}}
-      {{- else -}}
-        {{- $coverImage = .Params.cover -}}
-      {{- end -}}
-      {{- if $coverImage -}}
-      <img src="{{ $coverImage | absURL }}" alt="Cover Image" class="post-cover-img">
-      {{- end -}}
+      <img src="{{ .Params.cover | absURL }}" alt="Cover Image" class="post-cover-img">
     </div>
     {{ end }}
   </div>

@@ -1,45 +1,25 @@
 {{ define "main" }}
 <article class="markdown book-article">
 
-  {{ $categoryPath := .Params.category_path }}
-  {{ $parentCategory := index $categoryPath 0 }}
-
+  {{ $currentCategory := partial "categories/value-first" (slice .Title) }}
+  {{ $pages := slice }}
   {{ $subCategories := slice }}
-  {{ range .Site.RegularPages }}
-    {{ if .Params.categories }}
-      {{ $categories := .Params.categories }}
-      {{ if reflect.IsSlice $categories }}
-        {{ if ge (len $categories) 2 }}
-          {{ $category0 := index $categories 0 }}
-          {{ $category1 := index $categories 1 }}
-          {{ if eq $category0 $parentCategory }}
-            {{ if not (in $subCategories $category1) }}
-              {{ $subCategories = $subCategories | append $category1 }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
 
-  {{ $allPages := slice }}
-  {{ range .Site.RegularPages }}
-    {{ if .Params.categories }}
-      {{ $categories := .Params.categories }}
-      {{ if reflect.IsSlice $categories }}
-        {{ if ge (len $categories) 1 }}
-          {{ $category0 := index $categories 0 }}
-          {{ if eq $category0 $parentCategory }}
-            {{ $allPages = $allPages | append . }}
-          {{ end }}
-        {{ end }}
+  {{ range where .Site.RegularPages "Section" "post" }}
+    {{ $pageCategory := partial "categories/value-first" .Params.categories }}
+
+    {{ if eq $currentCategory $pageCategory }}
+      {{ $pages = $pages | append . }}
+      {{ $subCategory := partial "categories/value-second" .Params.categories }}
+      {{ if not (in $subCategories $subCategory) }}
+        {{ $subCategories = $subCategories | append $subCategory }}
       {{ end }}
     {{ end }}
   {{ end }}
 
   <div class="list-header">
     <h1><i class="fa-solid fa-folder"></i> {{ .Title }}</h1>
-    <p>전체 글 <em class="list-count">{{ len $allPages }}</em></p>
+    <p>전체 글 <em class="list-count">{{ len $pages }}</em></p>
   </div>
 
   {{ if $subCategories }}
@@ -47,10 +27,8 @@
     <h2>하위 카테고리</h2>
     <div class="category-chips">
       {{ range $subCategory := $subCategories }}
-      {{ $parentPath := index $categoryPath 0 | urlize }}
-      {{ $subPath := printf "/categories/%s/%s" $parentPath ($subCategory | urlize) }}
       <div class="category-item">
-        <a href="{{ $subPath }}/" class="category-link">
+        <a href="{{ "/categories/" | relURL }}{{ $currentCategory | urlize }}/{{ $subCategory | urlize }}" class="category-link">
           <span class="category-name"><i class="fa-solid fa-file"></i> {{ $subCategory }}</span>
         </a>
       </div>
@@ -59,18 +37,16 @@
   </div>
   {{ end }}
 
-  {{ if $allPages }}
+  {{ if $pages }}
   <div class="post-list">
-    {{ $paginate := .Paginate $allPages 10 }}
+    {{ $paginate := .Paginate $pages 10 }}
     <div class="post-list">
       {{ range $paginate.Pages }}
         {{ partial "docs/post-item.html" . }}
       {{ end }}
     </div>
 
-    {{ if gt $paginate.TotalPages 1 }}
-      {{ partial "docs/pagination/index.html" $paginate }}
-    {{ end }}
+    {{ partial "docs/pagination/index.html" $paginate }}
   </div>
   {{ else }}
   <div class="post-list empty-list">

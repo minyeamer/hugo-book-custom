@@ -1,7 +1,7 @@
 <nav>
 {{ partial "docs/brand" . }}
 {{ partial "docs/search-input" . }}
-{{ partial "docs/categories-menu" . }}
+{{ partial "categories/menu" . }}
 {{ if default false .Site.Params.BookMenu.recentPosts }}
   {{ partial "docs/recent-posts" . }}
 {{ end }}

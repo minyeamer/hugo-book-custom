@@ -763,13 +763,13 @@
 
 /* Link Preview */
 
-.markdown .link-preview-card {
+.markdown .bookmark-card {
   &[href]:hover {
     text-decoration: none;
   }
 }
 
-.link-preview-card {
+.bookmark-card {
   display: flex;
   width: 100%;
   margin: $padding-20 0;
@@ -784,7 +784,7 @@
     border-color: var(--color-link);
   }
 
-  .link-preview-image {
+  .bookmark-image {
     flex-shrink: 0;
     width: 200px;
     height: 150px;
@@ -798,7 +798,7 @@
     }
   }
 
-  .link-preview-content {
+  .bookmark-content {
     flex: 1;
     padding: $padding-16;
     display: flex;
@@ -806,7 +806,7 @@
     justify-content: center;
   }
 
-  .link-preview-title {
+  .bookmark-title {
     margin: 0 0 $padding-8 0;
     font-size: $font-size-18;
     font-weight: 600;
@@ -814,14 +814,14 @@
     color: var(--body-font-color);
   }
 
-  .link-preview-description {
+  .bookmark-description {
     margin: 0 0 $padding-8 0;
     font-size: $font-size-14;
     line-height: 1.5;
     color: var(--gray-500);
   }
 
-  .link-preview-url {
+  .bookmark-url {
     font-size: $font-size-12;
     color: var(--gray-500);
   }

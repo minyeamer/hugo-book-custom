@@ -1,64 +1,45 @@
 {{ define "main" }}
 <article class="markdown book-article">
 
-  {{ $categoryPath := .Params.category_path }}
-  {{ $allPages := slice }}
+  {{ $currentCategories := partial "categories/value" (slice .Params.parent .Title) }}
+  {{ $pages := slice }}
 
-  {{ range .Site.RegularPages }}
-    {{ if .Params.categories }}
-      {{ $categories := .Params.categories }}
-      {{ $typeStr := printf "%T" $categories }}
-      {{ if or (eq $typeStr "[]interface {}") (eq $typeStr "[]string") }}
-        {{ $matches := true }}
-        {{ if ne (len $categories) (len $categoryPath) }}
-          {{ $matches = false }}
-        {{ else }}
-          {{ range $index, $segment := $categoryPath }}
-            {{ if ne (index $categories $index) $segment }}
-              {{ $matches = false }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
+  {{ range where .Site.RegularPages "Section" "post" }}
+    {{ $pageCategories := partial "categories/value" .Params.categories }}
 
-        {{ if $matches }}
-          {{ $allPages = $allPages | append . }}
-        {{ end }}
-      {{ end }}
+    {{ if eq $currentCategories $pageCategories }}
+      {{ $pages = $pages | append . }}
     {{ end }}
   {{ end }}
 
   <div class="list-header">
     <h1><i class="fa-solid fa-file"></i> {{ .Title }}</h1>
-    <p>전체 글 <em class="list-count">{{ len $allPages }}</em></p>
+    <p>전체 글 <em class="list-count">{{ len $pages }}</em></p>
   </div>
 
-  {{ if eq (len $categoryPath) 2 }}
+  {{ if .Params.parent }}
   <div class="categories-section">
     <h2>상위 카테고리</h2>
     <div class="category-chips">
-      {{ $parentCategory := index $categoryPath 0 }}
-      {{ $parentUrl := printf "/categories/%s/" ($parentCategory | urlize) }}
       <div class="category-item">
-        <a href="{{ $parentUrl }}" class="category-link">
-          <span class="category-name"><i class="fa-solid fa-folder-open"></i> {{ $parentCategory }}</span>
+        <a href="{{ "/categories/" | relURL }}{{ .Params.parent | urlize }}/" class="category-link">
+          <span class="category-name"><i class="fa-solid fa-folder-open"></i> {{ .Params.parent }}</span>
         </a>
       </div>
     </div>
   </div>
   {{ end }}
 
-  {{ if $allPages }}
+  {{ if $pages }}
   <div class="post-list">
-    {{ $paginate := .Paginate $allPages 10 }}
+    {{ $paginate := .Paginate $pages 10 }}
     <div class="post-list">
       {{ range $paginate.Pages }}
         {{ partial "docs/post-item.html" . }}
       {{ end }}
     </div>
 
-    {{ if gt $paginate.TotalPages 1 }}
-      {{ partial "docs/pagination/index.html" $paginate }}
-    {{ end }}
+    {{ partial "docs/pagination/index.html" $paginate }}
   </div>
   {{ else }}
   <div class="post-list empty-list">

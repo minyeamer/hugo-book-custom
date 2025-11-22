@@ -1,34 +1,15 @@
-{{ $currentCategories := .Params.categories }}
+{{ $currentCategories := partial "categories/value" .Params.categories }}
 {{ $currentPage := . }}
-
-{{/* Concat current page categories to string for comparison */}}
-{{ $currentCategoryStr := "" }}
-{{ if reflect.IsSlice $currentCategories }}
-  {{ $currentCategoryStr = delimit $currentCategories "/" }}
-{{ else }}
-  {{ $currentCategoryStr = $currentCategories }}
-{{ end }}
 
 {{/* Initialize empty slice to collect pages with matching categories */}}
 {{ $pages := slice }}
 
 {{ range where .Site.RegularPages "Section" .Section }}
-  {{ $pageCategories := .Params.categories }}
+  {{ $pageCategories := partial "categories/value" .Params.categories }}
 
-  {{ if and $currentCategories $pageCategories }}
-
-    {{/* Concat iterated page categories to string for comparison */}}
-    {{ $pageCategoryStr := "" }}
-    {{ if reflect.IsSlice $pageCategories }}
-      {{ $pageCategoryStr = delimit $pageCategories "/" }}
-    {{ else }}
-      {{ $pageCategoryStr = $pageCategories }}
-    {{ end }}
-
-    {{/* Match pages with identical category strings */}}
-    {{ if eq $currentCategoryStr $pageCategoryStr }}
-      {{ $pages = $pages | append . }}
-    {{ end }}
+  {{/* Match pages with identical category strings */}}
+  {{ if eq $currentCategories $pageCategories }}
+    {{ $pages = $pages | append . }}
   {{ end }}
 {{ end }}
 
