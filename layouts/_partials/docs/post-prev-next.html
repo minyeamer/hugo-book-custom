@@ -23,14 +23,14 @@
   {{ if eq $page.RelPermalink $currentPage.RelPermalink }}
     {{ $matches = true }}
 
-    {{/* Set previous page if not at the beginning of the collection */}}
-    {{ if gt $index 0 }}
-      {{ $prev = index $pages (sub $index 1) }}
+    {{/* Set previous page if not at the end of the collection */}}
+    {{ if lt $index (sub (len $pages) 1) }}
+      {{ $prev = index $pages (add $index 1) }}
     {{ end }}
 
-    {{/* Set next page if not at the end of the collection */}}
-    {{ if lt $index (sub (len $pages) 1) }}
-      {{ $next = index $pages (add $index 1) }}
+    {{/* Set next page if not at the beginning of the collection */}}
+    {{ if gt $index 0 }}
+      {{ $next = index $pages (sub $index 1) }}
     {{ end }}
   {{ end }}
 {{ end }}
