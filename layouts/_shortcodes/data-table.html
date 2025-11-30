@@ -1,0 +1,33 @@
+{{- $csv := trim .Inner " \n\r\t" -}}
+{{- $lines := split $csv "\n" -}}
+{{- $allLines := slice -}}
+{{- range $lines -}}
+  {{- if . -}}
+    {{- $allLines = $allLines | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $headerLine := index $allLines 0 -}}
+{{- $header := split $headerLine "," -}}
+{{- $dataRows := after 1 $allLines -}}
+
+<div class="data-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        {{- range $header -}}
+        <th title="{{ . }}">{{ . }}</th>
+        {{- end -}}
+      </tr>
+    </thead>
+    <tbody>
+      {{- range $dataRows -}}
+        {{- $rowCells := split . "," -}}
+        <tr>
+          {{- range $rowCells -}}
+          <td title="{{ . }}">{{ . }}</td>
+          {{- end -}}
+        </tr>
+      {{- end -}}
+    </tbody>
+  </table>
+</div>

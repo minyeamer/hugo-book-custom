@@ -496,10 +496,20 @@
 
   pre {
     border-radius: 0.625rem;
-    padding: 1rem 0 0 0;
+    padding: 0;
     margin: 0;
     position: relative;
     overflow: scroll;
+
+    // Single-line
+    &:not(:has(.hljs-ln)) {
+      padding-top: 2rem;
+    }
+
+    // Multi-lines
+    &:has(.hljs-ln) {
+      padding-top: 1rem;
+    }
 
     // Mac window controls
     &::before {
@@ -761,7 +771,7 @@
   }
 }
 
-/* Link Preview */
+/* Bookmark */
 
 .markdown .bookmark-card {
   &[href]:hover {
@@ -824,5 +834,51 @@
   .bookmark-url {
     font-size: $font-size-12;
     color: var(--gray-500);
+  }
+}
+
+/* Data Table */
+
+.data-container {
+  overflow-x: auto;
+  margin: 1rem 0;
+  background: transparent;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: transparent;
+
+  thead {
+    background-color: var(--data-thead-color);
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  th,
+  td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--gray-300);
+    white-space: nowrap;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: var(--data-tbody-odd);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: var(--data-tbody-even);
+  }
+
+  tbody tr:hover {
+    background-color: var(--data-tbody-hover);
   }
 }
