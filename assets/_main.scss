@@ -214,7 +214,8 @@ body[dir="rtl"] .book-menu {
 }
 
 .book-cover {
-  margin-top: $padding-16;
+  margin-top: $padding-32;
+  margin-bottom: $padding-48;
   display: flex;
   justify-content: center;
   align-items: center;
