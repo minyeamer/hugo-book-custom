@@ -137,10 +137,8 @@
 
 .post-tags {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: $padding-8;
-  overflow: hidden;
-  white-space: nowrap;
 
   .tag {
     display: inline-block;
