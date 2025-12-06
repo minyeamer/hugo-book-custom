@@ -1,16 +1,6 @@
-{{- if .Params.cover -}}
-  {{- $coverImage := "" -}}
-  {{- if reflect.IsMap .Params.cover -}}
-    {{- if .Params.cover.image -}}
-      {{- $coverImage = .Params.cover.image -}}
-    {{- end -}}
-  {{- else -}}
-    {{- $coverImage = .Params.cover -}}
-  {{- end -}}
-  {{- if $coverImage -}}
+{{- with cond .Params.thumbnail .Params.thumbnail .Params.cover -}}
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="{{ $coverImage | absURL }}" />
-  {{- end -}}
+<meta name="twitter:image" content="{{ . | absURL }}" />
 {{- else }}
 {{- with $.Params.images -}}
 <meta name="twitter:card" content="summary_large_image"/>

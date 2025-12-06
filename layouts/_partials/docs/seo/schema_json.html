@@ -73,18 +73,8 @@
   "articleBody": {{ .Content | safeJS | htmlUnescape | plainify }},
   "wordCount" : "{{ .WordCount }}",
   "inLanguage": {{ .Language.Lang | default "en-us" }}
-  {{- if .Params.cover -}}
-  {{- $coverImage := "" -}}
-  {{- if reflect.IsMap .Params.cover -}}
-    {{- if .Params.cover.image -}}
-      {{- $coverImage = .Params.cover.image -}}
-    {{- end -}}
-  {{- else -}}
-    {{- $coverImage = .Params.cover -}}
-  {{- end -}}
-  {{- if $coverImage -}}
-  , "image": "{{ $coverImage | absURL }}"
-  {{- end -}}
+  {{- with cond .Params.thumbnail .Params.thumbnail .Params.cover -}}
+  , "image": "{{ . | absURL }}"
   {{- end -}},
   "datePublished": {{ .PublishDate }},
   "dateModified": {{ .Lastmod }},

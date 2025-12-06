@@ -23,7 +23,15 @@
     {{ end }}
   </div>
 
-  <div class="post-content-area{{ if .Params.cover }} has-cover{{ end }}">
+  {{ $coverImage := cond .Params.thumbnail .Params.thumbnail .Params.cover }}
+
+  <div class="post-content-area{{ if $coverImage }} has-cover{{ end }}">
+    {{ with cond .Params.cover .Params.cover .Params.thumbnail }}
+    <div class="post-cover-mobile">
+      <img src="{{ . | absURL }}" alt="Cover Image" class="post-cover-mobile-img">
+    </div>
+    {{ end }}
+    
     <div class="post-text-area">
       <h2 class="post-title">
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
@@ -33,9 +41,6 @@
       {{ if $summary }}
       <div class="post-summary">
         {{ $summary | plainify | truncate 148 }}
-      </div>
-      <div class="post-summary-mobile">
-        {{ $summary | plainify | truncate 72 }}
       </div>
       {{ end }}
 
@@ -48,9 +53,9 @@
       {{ end }}
     </div>
 
-    {{ if .Params.cover }}
+    {{ if $coverImage }}
     <div class="post-cover">
-      <img src="{{ .Params.cover | absURL }}" alt="Cover Image" class="post-cover-img">
+      <img src="{{ $coverImage | absURL }}" alt="Cover Image" class="post-cover-img">
     </div>
     {{ end }}
   </div>

@@ -11,16 +11,8 @@
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
 
-{{- if .Params.cover -}}
-  {{- $coverImage := "" -}}
-  {{- if reflect.IsMap .Params.cover -}}
-    {{- $coverImage = .Params.cover.image -}}
-  {{- else -}}
-    {{- $coverImage = .Params.cover -}}
-  {{- end -}}
-  {{- if $coverImage -}}
-  <meta property="og:image" content="{{ $coverImage | absURL }}" />
-  {{- end -}}
+{{- with cond .Params.thumbnail .Params.thumbnail .Params.cover -}}
+  <meta property="og:image" content="{{ . | absURL }}" />
 {{- else }}
   {{- with $.Params.images -}}
     {{- range first 6 . }}<meta property="og:image" content="{{ . | absURL }}" />{{ end -}}
