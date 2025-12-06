@@ -137,11 +137,14 @@
 
 .post-tags {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: $padding-8;
+  overflow: hidden;
+  position: relative;
 
   .tag {
     display: inline-block;
+    flex-shrink: 0;
     flex: none;
     background: var(--gray-100);
     color: var(--body-font-color);
@@ -149,11 +152,25 @@
     font-size: $font-size-14;
     border: 1px solid var(--gray-200);
     border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to left, var(--body-background), transparent);
+    pointer-events: none;
   }
 }
 
 .book-footer .post-tags {
   line-height: 1.6;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .markdown .category,
