@@ -3,10 +3,12 @@
 {{- $description := .Get "description" | default "" -}}
 {{- $image := .Get "image" | default "" -}}
 {{- $siteName := .Get "siteName" | default "" -}}
+{{- $fetch := .Get "fetch" | default "true" -}}
 
 {{- $ogTitle := "" -}}
 {{- $ogImage := "" -}}
 
+{{- if eq $fetch "true" -}}
 {{- with resources.GetRemote $url -}}
   {{- with .Content -}}
     {{- $content := . | string -}}
@@ -116,6 +118,7 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
+{{- end -}}
 {{- end -}}
 
 <a href="{{ $url }}" target="_blank" class="bookmark-card">
